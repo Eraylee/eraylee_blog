@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 12:50:13
- * @LastEditTime: 2019-12-04 17:30:14
+ * @LastEditTime: 2019-12-04 22:25:53
  * @LastEditors: ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\index.tsx
@@ -15,9 +15,9 @@ import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 
-import { Button } from "../Button";
-import { Link } from "../Link";
 import { Menu } from "./Menu";
+import { Link } from "../Link";
+import { Button } from "../Button";
 import { useStyles } from "./style";
 import { menuConfig } from "./menuConfig";
 

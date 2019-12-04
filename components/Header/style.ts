@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime: 2019-12-04 17:24:48
+ * @LastEditTime: 2019-12-04 22:25:40
  * @LastEditors: ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -29,6 +29,15 @@ export const useStyles = makeStyles((theme: Theme) =>
     },
     menu: {
       width: 220
+    },
+    paper: {
+      backgroundColor: "rgba(255,255,255,.8)",
+      backdropFilter: "blur(30px)"
+    },
+    modal: {
+      "& > .MuiBackdrop-root": {
+        backgroundColor: "rgba(0,0,0,0)"
+      }
     },
     listItem: {
       display: "flex",

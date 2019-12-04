@@ -8,15 +8,20 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 
+import { useStyles } from "./style";
 import { IMenuProps } from "./types";
 import { menuConfig } from "./menuConfig";
-import { useStyles } from "./style";
 
 export const Menu = (props: IMenuProps) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   return (
-    <Drawer {...props} anchor="right">
+    <Drawer
+      {...props}
+      anchor="right"
+      transitionDuration={380}
+      classes={{ paper: classes.paper, modal: classes.modal }}
+    >
       <List className={classes.menu}>
         <Box p={1}>
           <IconButton
