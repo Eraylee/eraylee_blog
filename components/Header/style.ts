@@ -1,18 +1,16 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime: 2019-12-04 22:25:40
+ * @LastEditTime: 2019-12-06 00:24:13
  * @LastEditors: ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
  */
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles((theme: Theme) =>
+export const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
-    appBar: {
-      backgroundColor: theme.palette.secondary.main
-    },
+    appBar: {},
     content: {
       width: "100%",
       display: "flex",
