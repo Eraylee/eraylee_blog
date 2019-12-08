@@ -22,24 +22,26 @@ export const Menu = (props: IMenuProps) => {
       transitionDuration={380}
       classes={{ paper: classes.paper, modal: classes.modal }}
     >
-      <List className={classes.menu}>
-        <Box p={1}>
-          <IconButton
-            edge="end"
-            size="small"
-            onClick={props.onClose as React.MouseEventHandler}
-          >
-            <CloseOutlinedIcon color="secondary" />
-          </IconButton>
-        </Box>
-        {menuConfig.map(v => (
-          <ListItem button divider key={v.key} className={classes.listItem}>
-            <Typography color="secondary" variant="overline">
-              {v.label}
-            </Typography>
-          </ListItem>
-        ))}
-      </List>
+      <Box className={classes.menu}>
+        <List className={classes.list}>
+          <Box p={1}>
+            <IconButton
+              edge="end"
+              size="small"
+              onClick={props.onClose as React.MouseEventHandler}
+            >
+              <CloseOutlinedIcon color="secondary" />
+            </IconButton>
+          </Box>
+          {menuConfig.map(v => (
+            <ListItem button divider key={v.key} className={classes.listItem}>
+              <Typography color="secondary" variant="overline">
+                {v.label}
+              </Typography>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
     </Drawer>
   );
 };
