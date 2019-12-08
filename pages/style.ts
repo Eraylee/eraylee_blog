@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime: 2019-12-06 00:26:07
+ * @LastEditTime: 2019-12-09 00:16:47
  * @LastEditors: ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -12,33 +12,48 @@ export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     banner: {
       width: "100%",
-      height: "46vh",
-      paddingTop: theme.spacing() * 7,
+      height: "60vh",
+      paddingTop: theme.spacing() * 24,
       display: "flex",
       flexDirection: "column",
-      justifyContent: "center",
+      // justifyContent: "center",
       alignItems: "center",
       backgroundColor: theme.palette.secondary.main,
-      boxShadow: theme.shadows[6],
-      borderRadius: 5,
+      // backgroundImage:
+      //   'url("https://www.transparenttextures.com/patterns/dust.png")',
+      // background: `linear-gradient( 180deg, ${theme.palette.secondary.main} 10%, #1D6FA3 100%)`,
+      // boxShadow: theme.shadows[6],
+      borderRadius: 8,
       boxSizing: "border-box"
     },
     container: {
-      marginTop: -theme.spacing() * 10,
-      padding: -theme.spacing() * 2
+      marginTop: -theme.spacing() * 20,
+      padding: theme.spacing() * 2
     },
     main: {
-      // maxWidth: 900,
-      // width: "100%",
-      // padding: 20,
       height: 800,
-      backgroundColor: "rgba(255,255,255,.7)",
-      backdropFilter: "blur(30px)",
-      boxShadow: theme.shadows[10],
-      borderRadius: 10
+      backgroundColor: theme.palette.background.paper
+      // padding: 8
     },
     welcome: {
       paddingBottom: theme.spacing() * 2
+    },
+    card: {
+      // display: "flex"
+    },
+    media: {
+      width: "100%",
+      height: 200
+    },
+    content: {
+      flex: 1
+    },
+    time: {
+      padding: "8px 0",
+      margin: 0
+    },
+    timeIcon: {
+      marginRight: 8
     }
   })
 );
