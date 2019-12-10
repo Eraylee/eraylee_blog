@@ -2,20 +2,32 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-04 17:34:03
  * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-04 21:48:09
+ * @LastEditTime: 2019-12-11 00:25:22
  */
-import { Action } from "easy-peasy";
-import { Theme } from "@material-ui/core/styles";
+import { Thunk, Action } from "easy-peasy";
+import { IQueryArticles } from "../api/types";
 
-export interface Itheme extends Theme {
-  bg?: string;
+export interface IHomeProps {
+  articles: IArticle[];
 }
 
 export interface IArticle {
-  name: string;
+  id: number;
+  title: string;
+  description: string;
+  isTop: boolean;
+  markdown: string;
+  html: string;
+  allowComment: boolean;
+  isDraft: boolean;
+  cover: string;
+  category: string;
+  tags: number[];
+  createAt: Date;
 }
 
 export interface IArticleModel {
-  article: IArticle;
-  setArticles: Action<IArticleModel, IArticle>;
+  articles: IArticle[];
+  setArticles: Action<IArticleModel, IArticle[]>;
+  getArticles: Thunk<IArticleModel, IQueryArticles>;
 }

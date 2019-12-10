@@ -1,4 +1,5 @@
 import React from "react";
+import { NextPage } from "next";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -8,14 +9,37 @@ import Card from "@material-ui/core/Card";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import CardActionArea from "@material-ui/core/CardActionArea";
 // import CardActions from "@material-ui/core/CardActions";
+import Chip from "@material-ui/core/Chip";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-// import Button from "@material-ui/core/Button";
+import { Link } from "../components/Link";
 import { useStyles } from "./style";
+import { IHomeProps } from "./types";
+import { apiGetArticles } from "../api";
+// import { useStoreState, useStoreActions } from "../store";
 
-const Home: React.FC = () => {
+// const data = [
+//   {
+//     title: "测试标题",
+//     description:
+//       "描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述",
+//     crreateAt: "2018-12-21",
+//     tags: ["前端", "react"]
+//   },
+//   {
+//     title: "测试标题",
+//     description:
+//       "描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述",
+//     crreateAt: "2018-12-21",
+//     tags: ["前端", "react"]
+//   }
+// ];
+
+const Home: NextPage<IHomeProps> = props => {
   const theme = useTheme();
   const classes = useStyles(theme);
+  // const articles = useStoreState(state => state.article.articles);
+  // const getArticles = useStoreActions(state => state.article.getArticles);
   return (
     <Box>
       <Box className={classes.banner}>
@@ -27,22 +51,26 @@ const Home: React.FC = () => {
         </Typography> */}
       </Box>
       <Container maxWidth="md" className={classes.container}>
-        <Box className={classes.main}>
-          <Card>
-            <CardActionArea className={classes.card}>
-              <Grid container spacing={3}>
+        <Box>
+          {props.articles.map((v, k) => (
+            <Card key={k} className={classes.card}>
+              <Grid container>
                 <Grid item xs={12} sm={4}>
-                  <CardMedia
-                    className={classes.media}
-                    image="../../static/wallhaven-lmrqdl.jpg"
-                    title="Contemplative Reptile"
-                  />
+                  <CardActionArea>
+                    <CardMedia
+                      className={classes.media}
+                      image="../../static/wallhaven-lmrqdl.jpg"
+                      title="Contemplative Reptile"
+                    />
+                  </CardActionArea>
                 </Grid>
+
                 <Grid item xs={12} sm={8}>
                   <CardContent className={classes.content}>
                     <Typography gutterBottom variant="h5">
-                      测试文章标题
+                      <Link href="/">{v.title}</Link>
                     </Typography>
+
                     <Box
                       display="flex"
                       alignItems="center"
@@ -53,8 +81,12 @@ const Home: React.FC = () => {
                         fontSize="small"
                         className={classes.timeIcon}
                       />
-                      <Typography gutterBottom variant="body2">
-                        2018-12-12
+                      <Typography
+                        gutterBottom
+                        variant="body2"
+                        className={classes.timeText}
+                      >
+                        {v.createAt}
                       </Typography>
                     </Box>
 
@@ -63,19 +95,37 @@ const Home: React.FC = () => {
                       color="textSecondary"
                       component="p"
                     >
-                      Lizards are a widespread group of squamate reptiles, with
-                      over 6,000 species, ranging across all continents except
-                      Antarctica
+                      {v.description}
                     </Typography>
+
+                    <Box className={classes.tagContent}>
+                      {v.tags.map((_v, _k) => (
+                        <Chip
+                          className={classes.tags}
+                          size="small"
+                          key={_k}
+                          label={_v}
+                          onClick={() => console.log(111)}
+                        />
+                      ))}
+                    </Box>
                   </CardContent>
                 </Grid>
               </Grid>
-            </CardActionArea>
-          </Card>
+            </Card>
+          ))}
         </Box>
       </Container>
     </Box>
   );
 };
-
+Home.getInitialProps = async () => {
+  try {
+    const res = await apiGetArticles({});
+    return res.data.data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
 export default Home;

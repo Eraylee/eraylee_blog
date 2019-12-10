@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime: 2019-12-09 00:16:47
+ * @LastEditTime: 2019-12-10 12:58:44
  * @LastEditors: ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     banner: {
       width: "100%",
-      height: "60vh",
+      height: "56vh",
       paddingTop: theme.spacing() * 24,
       display: "flex",
       flexDirection: "column",
@@ -27,32 +27,46 @@ export const useStyles = makeStyles((theme: Theme) =>
       boxSizing: "border-box"
     },
     container: {
-      marginTop: -theme.spacing() * 20,
-      padding: theme.spacing() * 2
-    },
-    main: {
-      height: 800,
-      backgroundColor: theme.palette.background.paper
-      // padding: 8
+      marginTop: -theme.spacing() * 18,
+      padding: 0,
+      boxSizing: "border-box"
     },
     welcome: {
       paddingBottom: theme.spacing() * 2
     },
     card: {
-      // display: "flex"
+      margin: theme.spacing() * 2,
+      boxSizing: "border-box",
+      "&:hover": {
+        boxShadow: theme.shadows[5]
+      }
     },
     media: {
       width: "100%",
-      height: 200
+      height: 210
     },
     content: {
-      flex: 1
+      flex: 1,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      boxSizing: "border-box",
+      height: "100%"
     },
     time: {
-      padding: "8px 0",
-      margin: 0
+      padding: "8px 0"
     },
     timeIcon: {
+      marginRight: 8
+    },
+    timeText: {
+      margin: 0,
+      padding: 0
+    },
+    tagContent: {
+      paddingTop: 8
+    },
+    tags: {
       marginRight: 8
     }
   })
