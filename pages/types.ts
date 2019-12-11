@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-04 17:34:03
  * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-11 00:25:22
+ * @LastEditTime: 2019-12-11 23:21:39
  */
 import { Thunk, Action } from "easy-peasy";
 import { IQueryArticles } from "../api/types";
@@ -23,7 +23,7 @@ export interface IArticle {
   cover: string;
   category: string;
   tags: number[];
-  createAt: Date;
+  updatedAt: Date;
 }
 
 export interface IArticleModel {
