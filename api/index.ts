@@ -2,10 +2,10 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-11 10:25:33
+ * @LastEditTime: 2019-12-12 23:23:56
  */
-import { _get, _post, _put } from "./server";
-import { IQueryArticles } from "./types";
+import { _get, _post } from "./server";
+import { IQueryArticles, IResult, IFile, IPageResult, IArticle } from "./types";
 
 /**
  * 获取分类树
@@ -32,14 +32,14 @@ export const apiGetTags = async () => {
  * @param data
  */
 export const apiGetArticles = async (data: IQueryArticles) => {
-  return await _get(`/article`, data);
+  return (await _get(`/article`, data)) as IPageResult<IArticle[]>;
 };
 /**
  * 通过id 查询文章
  * @param id
  */
 export const apiGetArticle = async (id: number) => {
-  return await _get(`/article/${id}`);
+  return (await _get(`/article/${id}`)) as IResult<IArticle>;
 };
 
 /**
@@ -47,5 +47,5 @@ export const apiGetArticle = async (id: number) => {
  * @param fid
  */
 export const apiGetFileByFid = async (fid: string) => {
-  return await _get(`/file/${fid}`);
+  return (await _get(`/file/${fid}`)) as IResult<IFile>;
 };

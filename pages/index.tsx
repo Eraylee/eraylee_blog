@@ -16,24 +16,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import { Link } from "../components/Link";
 import { useStyles } from "./style";
 import { IHomeProps } from "./types";
-import { apiGetArticles } from "../api";
+import { apiGetArticles, apiGetFileByFid } from "../api";
 
-// const data = [
-//   {
-//     title: "测试标题",
-//     description:
-//       "描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述",
-//     crreateAt: "2018-12-21",
-//     tags: ["前端", "react"]
-//   },
-//   {
-//     title: "测试标题",
-//     description:
-//       "描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述",
-//     crreateAt: "2018-12-21",
-//     tags: ["前端", "react"]
-//   }
-// ];
+const FILE_API = process.env.API;
 
 const Home: NextPage<IHomeProps> = props => {
   const theme = useTheme();
@@ -98,15 +83,16 @@ const Home: NextPage<IHomeProps> = props => {
                       </Typography>
 
                       <Box className={classes.tagContent}>
-                        {v.tags.map((_v, _k) => (
-                          <Chip
-                            className={classes.tags}
-                            size="small"
-                            key={_k}
-                            label={_v}
-                            onClick={() => console.log(111)}
-                          />
-                        ))}
+                        {v.tags &&
+                          v.tags.map((_v, _k) => (
+                            <Chip
+                              className={classes.tags}
+                              size="small"
+                              key={_k}
+                              label={_v}
+                              onClick={() => console.log(111)}
+                            />
+                          ))}
                       </Box>
                     </CardContent>
                   </Grid>
@@ -121,13 +107,22 @@ const Home: NextPage<IHomeProps> = props => {
 Home.getInitialProps = async () => {
   try {
     const res = await apiGetArticles({});
-    if (res.data.data.createAt) {
-      res.data.data.createAt = moment(res.data.data.createAt).format(
-        "YYYY-MM-DD"
-      );
-      console.log(moment(res.data.data.createAt).format("YYYY-MM-DD"));
+    const data = res.data.data;
+    const articles = [] as any[];
+    for (let item of data) {
+      let cover;
+      if (item.cover) {
+        const coverRes = await apiGetFileByFid(item.cover);
+        cover = FILE_API + coverRes.data.path + coverRes.data.fileName;
+      }
+      const artcle = Object.assign({}, data, {
+        updatedAt: moment(item.updatedAt).format("YYYY-MM-DD"),
+        cover
+      });
+      articles.push(artcle);
     }
-    return { articles: res.data.data };
+    console.log(articles);
+    return { articles };
   } catch (error) {
     return { articles: [] };
   }

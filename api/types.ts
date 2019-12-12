@@ -2,14 +2,8 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-10 22:12:56
+ * @LastEditTime: 2019-12-12 23:23:21
  */
-export interface IResult {
-  code: number;
-  data: any;
-  message: string;
-}
-
 export type Method =
   | "get"
   | "GET"
@@ -31,6 +25,47 @@ export interface IQuery {
   limit?: number;
 }
 
+export interface IBaseResult {
+  code: number;
+  message: string;
+}
+
+export interface IResult<T> extends IBaseResult {
+  data: T;
+}
+
+export interface IPageResult<T> extends IBaseResult {
+  data: { data: T; page: number; total: number };
+}
+
 export interface IQueryArticles extends IQuery {
   title?: string;
+}
+
+export interface IArticle {
+  id: number;
+  title: string;
+  description: string;
+  isTop: boolean;
+  markdown: string;
+  html: string;
+  allowComment: boolean;
+  isDraft: boolean;
+  cover?: string;
+  category: string;
+  tags: number[];
+  updatedAt: string;
+}
+
+export interface IFile {
+  id: number;
+  path: string;
+  originalName: string;
+  fileName: string;
+  size: number;
+  fieldName: string;
+  mimeType: string;
+  fid: string;
+  createdAt: string;
+  updatedAt: string;
 }
