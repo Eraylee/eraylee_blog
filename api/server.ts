@@ -2,56 +2,35 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-12 00:51:02
+ * @LastEditTime: 2019-12-12 22:50:40
  */
-import axios from "axios";
-import { Method, IResult } from "./types";
+import fetch from "isomorphic-unfetch";
+import { Method } from "./types";
 
-let BASE_API = "http://localhost:5050";
+let BASE_API = process.env.API;
 
-if (process.env.NODE_ENV !== "development") {
-  BASE_API = process.env.API as string;
-}
-/**
- * 设置默认Content-Type
- */
-axios.defaults.headers.post["Content-Type"] = "application/json";
-/**
- * request拦截器
- */
-axios.interceptors.request.use(
-  config => config,
-  error => Promise.reject(error)
-);
-/**
- * response拦截器
- */
-axios.interceptors.response.use(
-  res => res.data,
-  err => err.response.data
-);
+// if (process.env.NODE_ENV !== "development") {
+//   BASE_API = process.env.API as string;
+// }
+
 /**
  * 封装request
  * @param method
  * @param url
  * @param data
  */
-const request = (method: Method, url: string, data: any): Promise<IResult> => {
+const request = (method: Method, url: string, data: any) => {
   return new Promise(async (resolve, reject) => {
-    try {
-      const res: any = await axios({
-        method,
-        url: BASE_API + url,
-        data
-      });
-      if (res && res.code === 200) {
-        resolve(res);
-      } else {
-        reject(res);
-      }
-    } catch (error) {
-      reject(error);
+    const options = {
+      method
+    };
+    if (method !== "get" && data) {
+      Object.assign(options, { body: data });
     }
+    fetch(BASE_API + url, options)
+      .then(res => res.json())
+      .then(data => resolve(data))
+      .catch(err => reject(err));
   });
 };
 /**
@@ -69,12 +48,4 @@ export const _get = async (url: string, params = {}) => {
  */
 export const _post = async (url: string, data: any) => {
   return await request("post", url, data);
-};
-/**
- * 封装put请求
- * @param url
- * @param data
- */
-export const _put = async (url: string, data: any) => {
-  return await request("put", url, data);
 };
