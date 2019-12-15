@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from "react";
 import { Header } from "../Header";
-import Box from "@material-ui/core/Box";
+import Toolbar from "@material-ui/core/Toolbar";
 
 export const Layout = (props: PropsWithChildren<{}>) => (
   <>
     <Header />
-    <Box id="back-to-top-anchor" />
+    <Toolbar id="back-to-top-anchor" />
     {props.children}
   </>
 );

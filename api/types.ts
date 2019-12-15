@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-12 23:23:21
+ * @LastEditTime: 2019-12-14 23:01:46
  */
 export type Method =
   | "get"
@@ -52,8 +52,8 @@ export interface IArticle {
   allowComment: boolean;
   isDraft: boolean;
   cover?: string;
-  category: string;
-  tags: number[];
+  category: ICategory;
+  tags: Itag[];
   updatedAt: string;
 }
 
@@ -68,4 +68,17 @@ export interface IFile {
   fid: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface Itag {
+  id: number;
+  name: string;
+  color: string;
+}
+
+export interface ICategory {
+  id: number;
+  name: string;
+  code: string;
+  enabled: boolean;
 }

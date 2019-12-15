@@ -6,7 +6,6 @@
     "lib": ["dom", "es2017"],
     "baseUrl": ".",
     "moduleResolution": "node",
-    "strict": true,
     "allowJs": true,
     "noEmit": true,
     "allowSyntheticDefaultImports": true,
@@ -19,7 +18,8 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "strict": true
   },
   "exclude": ["dist", ".next", "out", "next.config.js"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

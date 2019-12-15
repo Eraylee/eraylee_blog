@@ -2,17 +2,20 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-12 22:50:40
+ * @LastEditTime: 2019-12-15 17:45:46
  */
 import fetch from "isomorphic-unfetch";
 import { Method } from "./types";
 
-let BASE_API = process.env.API;
+const isServer = typeof window === "undefined";
+let BASE_API = isServer ? process.env.API : "/api";
+// let BASE_API = "/api";
+// let BASE_API = "localhost:3200";
 
-// if (process.env.NODE_ENV !== "development") {
-//   BASE_API = process.env.API as string;
-// }
-
+if (process.env.NODE_ENV !== "development") {
+  BASE_API = process.env.API;
+}
+console.log(BASE_API);
 /**
  * 封装request
  * @param method
