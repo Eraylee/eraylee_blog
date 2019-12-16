@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-15 17:45:46
+ * @LastEditTime: 2019-12-16 21:15:46
  */
 import fetch from "isomorphic-unfetch";
 import { Method } from "./types";
@@ -15,7 +15,6 @@ let BASE_API = isServer ? process.env.API : "/api";
 if (process.env.NODE_ENV !== "development") {
   BASE_API = process.env.API;
 }
-console.log(BASE_API);
 /**
  * 封装request
  * @param method

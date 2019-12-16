@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-04 17:34:03
  * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-15 17:30:15
+ * @LastEditTime: 2019-12-16 21:14:27
  */
 import express from "express";
 import next from "next";
@@ -12,7 +12,7 @@ const port = parseInt(process.env.PORT as string, 10) || 3200;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
-
+const API = process.env.API;
 app
   .prepare()
   .then(() => {
@@ -21,7 +21,7 @@ app
     if (dev) {
       server.use(
         proxy("/api", {
-          target: "http://localhost:5050/",
+          target: API,
           changeOrigin: true,
           pathRewrite: { "^/api": "/" }
         })

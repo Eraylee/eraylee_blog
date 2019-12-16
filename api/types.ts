@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-14 23:01:46
+ * @LastEditTime: 2019-12-16 13:41:51
  */
 export type Method =
   | "get"
