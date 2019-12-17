@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-16 21:15:46
+ * @LastEditTime: 2019-12-17 22:24:59
  */
 import fetch from "isomorphic-unfetch";
 import { Method } from "./types";
@@ -31,7 +31,10 @@ const request = (method: Method, url: string, data: any) => {
     }
     fetch(BASE_API + url, options)
       .then(res => res.json())
-      .then(data => resolve(data))
+      .then(data => {
+        
+        return data.code === 200 ? resolve(data) : reject(data);
+      })
       .catch(err => reject(err));
   });
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import Error from 'next/error'
 import { NextPage } from "next";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
@@ -14,7 +15,7 @@ import { useStyles } from "./style";
 import { IArticleProps } from "./types";
 import { IArticle } from "../../api/types";
 import { apiGetArticle, apiGetFileByFid } from "../../api";
-
+// import "./index.css";
 const FILE_API = process.env.API;
 const Article: NextPage<IArticleProps> = props => {
   const article = props.article as IArticle;
@@ -26,13 +27,14 @@ const Article: NextPage<IArticleProps> = props => {
       <Box className={classes.cover}>
         <Container fixed>
           <Box className={classes.header}>
-            <Typography variant="h4" color="primary">
+            <Typography variant="h4" color="primary" align="center">
               {article.title}
             </Typography>
             <Typography
               variant="subtitle1"
               color="primary"
               className={classes.discription}
+              align="center"
             >
               {article.description}
             </Typography>
@@ -68,7 +70,6 @@ const Article: NextPage<IArticleProps> = props => {
 Article.getInitialProps = async ({ query }) => {
   try {
     const res = await apiGetArticle(Number(query.id as string));
-
     const article = res.data;
     article.updatedAt = moment(article.updatedAt).format("YYYY-MM-DD");
     if (article.cover) {
