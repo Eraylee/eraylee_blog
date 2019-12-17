@@ -1,5 +1,5 @@
 import React from "react";
-import App from "next/app";
+import App, { AppContext } from "next/app";
 import { create } from "jss";
 import Head from "next/head";
 import preset from "jss-preset-default";
@@ -14,9 +14,24 @@ import widthStore from "../lib/withStore";
 
 interface IAppProps {
   store: Store;
+  err: Error;
 }
 const jss = create(jssPreset()).setup(preset());
 class MyApp extends App<IAppProps> {
+  static async getInitialProps({ Component, ctx }: AppContext) {
+    let pageProps = {};
+    let err;
+    if (Component.getInitialProps) {
+      try {
+        pageProps = await Component.getInitialProps(ctx);
+      } catch (error) {
+        err = error;
+      }
+    }
+    console.log("ctx", ctx.res);
+    return { pageProps, err };
+  }
+
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.log("CUSTOM ERROR HANDLING", error);
     // This is needed to render errors correctly in development / production
