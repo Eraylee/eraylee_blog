@@ -30,12 +30,12 @@ export const Menu = (props: IMenuProps) => {
               size="small"
               onClick={props.onClose as React.MouseEventHandler}
             >
-              <CloseOutlinedIcon color="secondary" />
+              <CloseOutlinedIcon color="primary" />
             </IconButton>
           </Box>
           {menuConfig.map(v => (
             <ListItem button divider key={v.key} className={classes.listItem}>
-              <Typography color="secondary" variant="overline">
+              <Typography color="primary" variant="overline">
                 {v.label}
               </Typography>
             </ListItem>

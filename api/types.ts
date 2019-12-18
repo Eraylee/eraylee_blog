@@ -1,24 +1,24 @@
 /*
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
- * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-16 13:41:51
+ * @LastEditors  : ERAYLEE
+ * @LastEditTime : 2019-12-18 12:58:30
  */
 export type Method =
-  | "get"
-  | "GET"
-  | "delete"
-  | "DELETE"
-  | "head"
-  | "HEAD"
-  | "options"
-  | "OPTIONS"
-  | "post"
-  | "POST"
-  | "put"
-  | "PUT"
-  | "patch"
-  | "PATCH";
+  | 'get'
+  | 'GET'
+  | 'delete'
+  | 'DELETE'
+  | 'head'
+  | 'HEAD'
+  | 'options'
+  | 'OPTIONS'
+  | 'post'
+  | 'POST'
+  | 'put'
+  | 'PUT'
+  | 'patch'
+  | 'PATCH';
 
 export interface IQuery {
   page?: number;
@@ -54,6 +54,7 @@ export interface IArticle {
   cover?: string;
   category: ICategory;
   tags: Itag[];
+  createdAt: string;
   updatedAt: string;
 }
 

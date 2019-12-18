@@ -1,34 +1,35 @@
-import React from "react";
-import Box from "@material-ui/core/Box";
-import Chip from "@material-ui/core/Chip";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import { useTheme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import CategoryIcon from "@material-ui/icons/Category";
-import CardContent from "@material-ui/core/CardContent";
-import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import React from 'react';
+import Box from '@material-ui/core/Box';
+import Chip from '@material-ui/core/Chip';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import { useTheme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import CategoryIcon from '@material-ui/icons/Category';
+import CardContent from '@material-ui/core/CardContent';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 
-import { IArticleCardProps } from "./types";
-import { Link } from "../Link";
-import { useStyles } from "./style";
+import { Link } from '../Link';
+import { useStyles } from './style';
+import { toDate } from '../../lib/pipe';
+import { IArticleCardProps } from './types';
 
-export const ArticleCard: React.FC<IArticleCardProps> = props => {
+export const ArticleCard: React.FC<IArticleCardProps> = ({ article }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   return (
     <Card className={classes.card}>
       <Grid container>
-        {props.article.cover && (
+        {article.cover && (
           <Grid item xs={12} sm={4}>
             <CardActionArea>
               <CardMedia
                 className={classes.media}
-                image={props.article.cover}
-                title="Contemplative Reptile"
+                image={article.cover}
+                title='Contemplative Reptile'
               />
             </CardActionArea>
           </Grid>
@@ -36,28 +37,28 @@ export const ArticleCard: React.FC<IArticleCardProps> = props => {
         <Grid item xs={12} sm={8}>
           <CardContent className={classes.content}>
             <Box>
-              <Typography gutterBottom variant="h5">
+              <Typography gutterBottom variant='h5'>
                 <Link
                   href={{
-                    pathname: "/article",
-                    query: { id: props.article.id }
+                    pathname: '/article',
+                    query: { id: article.id },
                   }}
                 >
-                  {props.article.title}
+                  {article.title}
                 </Link>
               </Typography>
 
-              <Typography variant="body2" color="textSecondary" component="p">
-                {props.article.description}
+              <Typography variant='body2' color='textPrimary' component='p'>
+                {article.description}
               </Typography>
             </Box>
 
             <Box>
               <Box className={classes.tagContent}>
-                {props.article.tags.map(V => (
+                {article.tags.map(V => (
                   <Chip
                     className={classes.tags}
-                    size="small"
+                    size='small'
                     key={V.id}
                     label={V.name}
                   />
@@ -65,24 +66,24 @@ export const ArticleCard: React.FC<IArticleCardProps> = props => {
               </Box>
               <Box className={classes.meta}>
                 <Box className={classes.bottomItem}>
-                  <AccessTimeIcon color="primary" className={classes.icon} />
-                  <Typography variant="body2" className={classes.text}>
-                    {props.article.updatedAt}
+                  <AccessTimeIcon color='primary' className={classes.icon} />
+                  <Typography variant='body2' className={classes.text}>
+                    {toDate(article.createdAt)}
                   </Typography>
                 </Box>
                 <Box className={classes.bottomItem}>
                   <ChatBubbleOutlineIcon
-                    color="primary"
+                    color='primary'
                     className={classes.icon}
                   />
-                  <Typography variant="body2" className={classes.text}>
+                  <Typography variant='body2' className={classes.text}>
                     {12}
                   </Typography>
                 </Box>
                 <Box className={classes.bottomItem}>
-                  <CategoryIcon color="primary" className={classes.icon} />
-                  <Typography variant="body2" className={classes.text}>
-                    {props.article.category.name}
+                  <CategoryIcon color='primary' className={classes.icon} />
+                  <Typography variant='body2' className={classes.text}>
+                    {article.category.name}
                   </Typography>
                 </Box>
               </Box>

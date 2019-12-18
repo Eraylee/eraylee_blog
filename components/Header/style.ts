@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime: 2019-12-07 01:21:40
- * @LastEditors: ERAYLEE
+ * @LastEditTime : 2019-12-18 23:21:06
+ * @LastEditors  : ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
  */
@@ -18,6 +18,7 @@ export const useStyles = makeStyles((_theme: Theme) =>
       backgroundColor: "inherit"
     },
     link: {
+      color: "#fff",
       "& > a": {
         color: "#fff"
       },

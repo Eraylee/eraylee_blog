@@ -1,18 +1,13 @@
 /*
  * @Author: ERAYLEE
  * @Date: 2019-12-04 12:49:46
- * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-04 12:58:51
+ * @LastEditors  : ERAYLEE
+ * @LastEditTime : 2019-12-18 23:19:34
  */
 export const menuConfig = [
   {
     key: "PIGEONHOLE",
     label: "归档",
-    href: "/"
-  },
-  {
-    key: "CATEGORY",
-    label: "分类",
     href: "/"
   },
   {
