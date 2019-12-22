@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2019-12-18 12:58:30
+ * @LastEditTime : 2019-12-20 13:45:39
  */
 export type Method =
   | 'get'
@@ -19,6 +19,8 @@ export type Method =
   | 'PUT'
   | 'patch'
   | 'PATCH';
+
+export type Request<T> = (method: Method, url: string, data: any) => T;
 
 export interface IQuery {
   page?: number;
@@ -80,6 +82,5 @@ export interface Itag {
 export interface ICategory {
   id: number;
   name: string;
-  code: string;
-  enabled: boolean;
+  parentId?: number;
 }

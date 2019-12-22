@@ -1,38 +1,48 @@
 /*
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
- * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-13 09:09:15
+ * @LastEditors  : ERAYLEE
+ * @LastEditTime : 2019-12-20 22:02:30
  */
-import { _get, _post } from "./server";
-import { IQueryArticles, IResult, IFile, IPageResult, IArticle } from "./types";
+import { _get, _post } from './server';
+import {
+  IQueryArticles,
+  IResult,
+  IFile,
+  Itag,
+  IPageResult,
+  IArticle,
+  ICategory,
+} from './types';
 
 /**
  * 获取分类树
  */
-export const apiGetCategoryTree = async () => {
+export const apiGetCategorys = async (): Promise<IResult<ICategory[]>> => {
   return await _get(`/category`);
 };
 /**
  * 通过id 查询标签
  * @param id
  */
-export const apiGetTag = async (id: number) => {
+export const apiGetTag = async (id: number): Promise<IResult<Itag>> => {
   return await _get(`/tag/${id}`);
 };
 /**
  * 查询标签
- * @param id
+ * @param
  */
-export const apiGetTags = async () => {
+export const apiGetTags = async (): Promise<IPageResult<Itag[]>> => {
   return await _get(`/tag`);
 };
 /**
  * 查询文章
  * @param data
  */
-export const apiGetArticles = async (data: IQueryArticles) => {
-  return (await _get(`/article`, data)) as IPageResult<IArticle[]>;
+export const apiGetArticles = async (
+  data: IQueryArticles,
+): Promise<IPageResult<IArticle[]>> => {
+  return await _get(`/article`, data);
 };
 /**
  * 通过id 查询文章

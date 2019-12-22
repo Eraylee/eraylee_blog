@@ -1,20 +1,16 @@
-import { createStore, Store, State } from "easy-peasy";
-
-import { useStoreActions, useStoreDispatch, useStoreState } from "./hooks";
-import { IArticleModel } from "../pages/types";
-import article from "../pages/model";
+import { createStore, Store, State } from 'easy-peasy';
+import { IHeaderModel } from '../components/Header/types';
+import { header } from '../components/Header/model';
 
 export interface StoreModel {
-  article: IArticleModel;
+  header: IHeaderModel;
 }
 
-const isServer = typeof window === "undefined";
+const isServer = typeof window === 'undefined';
 
 export const storeModel: StoreModel = {
-  article
+  header,
 };
-
-export { useStoreActions, useStoreDispatch, useStoreState };
 
 let store: Store<StoreModel>;
 
@@ -32,4 +28,5 @@ const initializeStore = (initialState?: State) => {
   return store;
 };
 
+export { useStoreActions, useStoreDispatch, useStoreState } from './hooks';
 export default initializeStore;

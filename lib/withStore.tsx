@@ -1,6 +1,6 @@
-import React from "react";
-import initializeStore from "../store";
-import { Store } from "easy-peasy";
+import React from 'react';
+import initializeStore from '../store';
+import { Store } from 'easy-peasy';
 
 export default (App: any) => {
   return class AppWithRedux extends React.Component {
@@ -11,13 +11,13 @@ export default (App: any) => {
       appContext.ctx.store = store;
 
       let appProps = {};
-      if (typeof App.getInitialProps === "function") {
+      if (typeof App.getInitialProps === 'function') {
         appProps = await App.getInitialProps(appContext);
       }
 
       return {
         ...appProps,
-        initialState: store.getState()
+        initialState: store.getState(),
       };
     }
 
