@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2019-12-20 13:45:39
+ * @LastEditTime : 2020-01-12 21:28:44
  */
 export type Method =
   | 'get'
@@ -22,65 +22,78 @@ export type Method =
 
 export type Request<T> = (method: Method, url: string, data: any) => T;
 
-export interface IQuery {
+export interface QueryParams {
   page?: number;
   limit?: number;
 }
 
-export interface IBaseResult {
+export interface BaseResult {
   code: number;
   message: string;
 }
 
-export interface IResult<T> extends IBaseResult {
+export interface Result<T> extends BaseResult {
   data: T;
 }
 
-export interface IPageResult<T> extends IBaseResult {
+export interface PageResult<T> extends BaseResult {
   data: { data: T; page: number; total: number };
 }
 
-export interface IQueryArticles extends IQuery {
+export interface QueryParamsArticles extends QueryParams {
   title?: string;
 }
 
-export interface IArticle {
-  id: number;
+export interface Article {
+  id: string;
   title: string;
   description: string;
   isTop: boolean;
   markdown: string;
   html: string;
   allowComment: boolean;
+  user: User;
   isDraft: boolean;
-  cover?: string;
-  category: ICategory;
-  tags: Itag[];
+  cover: FileRes;
+  category: Category;
+  tags: Tag[];
   createdAt: string;
   updatedAt: string;
 }
 
-export interface IFile {
-  id: number;
+export interface FileRes {
+  id: string;
   path: string;
   originalName: string;
   fileName: string;
   size: number;
   fieldName: string;
   mimeType: string;
-  fid: string;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface Itag {
-  id: number;
+export interface Tag {
+  id: string;
   name: string;
   color: string;
 }
 
-export interface ICategory {
-  id: number;
+export interface Category {
+  id: string;
   name: string;
-  parentId?: number;
+  parentId?: string;
+}
+export interface User {
+  id?: string;
+  username: string;
+  nickname: string;
+  role?: string;
+}
+export interface Link {
+  id: string;
+  owner: string;
+  url: string;
+  description: string;
+  avatar: FileRes;
 }

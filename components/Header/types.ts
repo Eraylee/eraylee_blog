@@ -6,22 +6,22 @@
  */
 
 import { Thunk, Action } from 'easy-peasy';
-import { ITreeItem } from '../../lib/util/types';
+import { TreeItem } from '../../lib/util/types';
 export interface IHeaderProps {}
 
 export interface ICategoryProps {
-  categorys: ITreeItem[];
+  categorys: TreeItem[];
 }
 export interface IMenuProps {
   open: boolean;
   onClose: {
     bivarianceHack(event: {}, reason: 'backdropClick' | 'escapeKeyDown'): void;
   }['bivarianceHack'];
-  categorys: ITreeItem[];
+  categorys: TreeItem[];
 }
 
 export interface IHeaderModel {
-  categorys: ITreeItem[];
-  setCategorys: Action<IHeaderModel, ITreeItem[]>;
+  categorys: TreeItem[];
+  setCategorys: Action<IHeaderModel, TreeItem[]>;
   getCategorys: Thunk<IHeaderModel>;
 }

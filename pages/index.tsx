@@ -8,9 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import { useStyles } from './style';
 import { IHomeProps } from './types';
 import { ArticleCard } from '../components/ArticleCard';
-import { apiGetArticles, apiGetFileByFid } from '../api';
+import { apiGetArticles } from '../api';
 
-const FILE_API = process.env.API;
+// const FILE_API = process.env.API;
 
 const Home: NextPage<IHomeProps> = props => {
   const theme = useTheme();
@@ -37,19 +37,7 @@ const Home: NextPage<IHomeProps> = props => {
 Home.getInitialProps = async () => {
   try {
     const res = await apiGetArticles({});
-    const data = res.data.data;
-    const articles = [] as any[];
-    for (let item of data) {
-      let cover;
-      if (item.cover) {
-        const coverRes = await apiGetFileByFid(item.cover);
-        cover = FILE_API + coverRes.data.path + coverRes.data.fileName;
-      }
-      const article = Object.assign({}, item, {
-        cover,
-      });
-      articles.push(article);
-    }
+    const articles = res.data.data;
     return { articles };
   } catch (error) {
     console.error(error);

@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-04 12:49:46
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2019-12-18 23:19:34
+ * @LastEditTime : 2020-01-12 21:38:40
  */
 export const menuConfig = [
   {
@@ -18,7 +18,7 @@ export const menuConfig = [
   {
     key: "LINKS",
     label: "友链",
-    href: "/"
+    href: "/links"
   },
   {
     key: "ABOUT",

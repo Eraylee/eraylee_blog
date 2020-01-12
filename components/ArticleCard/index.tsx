@@ -15,9 +15,11 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import { Link } from '../Link';
 import { useStyles } from './style';
 import { toDate } from '../../lib/pipe';
-import { IArticleCardProps } from './types';
+import { ArticleCardProps } from './types';
 
-export const ArticleCard: React.FC<IArticleCardProps> = ({ article }) => {
+const BASE_URL = process.env.API;
+
+export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   return (
@@ -28,7 +30,7 @@ export const ArticleCard: React.FC<IArticleCardProps> = ({ article }) => {
             <CardActionArea>
               <CardMedia
                 className={classes.media}
-                image={article.cover}
+                image={BASE_URL + article.cover.path + article.cover.fileName}
                 title='Contemplative Reptile'
               />
             </CardActionArea>
@@ -56,12 +58,12 @@ export const ArticleCard: React.FC<IArticleCardProps> = ({ article }) => {
 
             <Box>
               <Box className={classes.tagContent}>
-                {article.tags.map(V => (
+                {article.tags.map(v => (
                   <Chip
                     className={classes.tags}
                     size='small'
-                    key={V.id}
-                    label={V.name}
+                    key={v.id}
+                    label={v.name}
                   />
                 ))}
               </Box>

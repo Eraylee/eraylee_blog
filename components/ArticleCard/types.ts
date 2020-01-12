@@ -1,11 +1,11 @@
 /*
  * @Author: ERAYLEE
  * @Date: 2019-12-13 12:54:20
- * @LastEditors: ERAYLEE
- * @LastEditTime: 2019-12-13 12:55:57
+ * @LastEditors  : ERAYLEE
+ * @LastEditTime : 2020-01-10 09:02:23
  */
-import { IArticle } from "../../api/types";
+import { Article } from "../../api/types";
 
-export interface IArticleCardProps {
-  article: IArticle;
+export interface ArticleCardProps {
+  article: Article;
 }

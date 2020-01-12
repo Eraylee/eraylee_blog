@@ -2,10 +2,11 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2019-12-20 21:58:46
+ * @LastEditTime : 2019-12-24 18:20:04
  */
 import fetch from 'isomorphic-unfetch';
 import { Method } from './types';
+import { getQueryStr } from '../lib/util';
 
 const isServer = typeof window === 'undefined';
 let BASE_API = isServer ? process.env.API : '/api';
@@ -19,17 +20,24 @@ if (process.env.NODE_ENV !== 'development') {
  * 封装request
  * @param method
  * @param url
- * @param data
+ * @param params
  */
-const request = <T, P>(method: Method, url: string, data?: P): Promise<T> => {
+const request = <T, P>(method: Method, url: string, params?: P): Promise<T> => {
   return new Promise(async (resolve, reject) => {
+    let requestUrl = BASE_API + url;
+
     const options = {
       method,
     };
-    if (method !== 'get' && data) {
-      Object.assign(options, { body: data });
+    if (params) {
+      if (method === 'get') {
+        requestUrl += getQueryStr(params);
+      } else {
+        Object.assign(options, { body: params });
+      }
     }
-    fetch(BASE_API + url, options)
+
+    fetch(requestUrl, options)
       .then(res => res.json())
       .then(data => {
         return data.code === 200 ? resolve(data) : reject(data);

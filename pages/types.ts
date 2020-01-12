@@ -2,11 +2,11 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-04 17:34:03
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2019-12-20 23:03:19
+ * @LastEditTime : 2020-01-12 22:46:52
  */
 
-import { IArticle } from '../api/types';
+import { Article } from '../api/types';
 
 export interface IHomeProps {
-  articles: IArticle[];
+  articles: Article[];
 }

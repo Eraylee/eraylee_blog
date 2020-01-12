@@ -2,10 +2,10 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-21 16:34:19
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2019-12-21 16:35:50
+ * @LastEditTime : 2020-01-10 09:05:48
  */
-export interface ITreeItem {
-  key: number;
+export interface TreeItem {
+  key: string;
   name: string;
-  children?: ITreeItem[];
+  children?: TreeItem[];
 }

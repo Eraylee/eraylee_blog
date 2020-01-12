@@ -12,18 +12,19 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 import { toDateTime } from '../../lib/pipe';
 import { useStyles } from './style';
-import { IArticleProps } from './types';
-import { IArticle } from '../../api/types';
-import { apiGetArticle, apiGetFileByFid } from '../../api';
+import { ArticleProps } from './types';
+import { Article } from '../../api/types';
+import { apiGetArticle } from '../../api';
 // import "./index.css";
-const FILE_API = process.env.API;
-const Article: NextPage<IArticleProps> = props => {
+const BASE_URL = process.env.API;
+const ArticlePage: NextPage<ArticleProps> = props => {
   if (props.error) {
     return <Error statusCode={props.error.code} title={props.error.message} />;
   }
-  const article = props.article as IArticle;
+  const article = props.article as Article;
   const theme = useTheme();
-  Object.assign(theme, { cover: article.cover });
+  const cover = BASE_URL + article.cover.path + article.cover.fileName;
+  Object.assign(theme, { cover });
   const classes = useStyles(theme);
 
   return (
@@ -71,17 +72,13 @@ const Article: NextPage<IArticleProps> = props => {
     </>
   );
 };
-Article.getInitialProps = async ({ query }) => {
+ArticlePage.getInitialProps = async ({ query }) => {
   try {
-    const res = await apiGetArticle(Number(query.id as string));
+    const res = await apiGetArticle(query.id as string);
     const article = res.data;
-    if (article.cover) {
-      const coverRes = await apiGetFileByFid(article.cover);
-      article.cover = FILE_API + coverRes.data.path + coverRes.data.fileName;
-    }
     return { article };
   } catch (error) {
     return { error };
   }
 };
-export default Article;
+export default ArticlePage;
