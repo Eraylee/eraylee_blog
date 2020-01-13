@@ -7,7 +7,7 @@
 import { Link } from '../../api/types';
 
 export interface LinksPageProps {
-  links?: Link[];
+  links?: Link[][];
   error?: {
     code: number;
     message: string;

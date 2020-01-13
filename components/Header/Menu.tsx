@@ -11,6 +11,8 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 
+import { Link } from '../Link';
+
 import { useStyles } from './style';
 import { IMenuProps } from './types';
 import { menuConfig } from './menuConfig';
@@ -51,7 +53,7 @@ export const Menu = ({ categorys, ...props }: IMenuProps) => {
           {menuConfig.map(v => (
             <ListItem button divider key={v.key} className={classes.listItem}>
               <Typography color='primary' variant='overline'>
-                {v.label}
+                <Link href={v.href}> {v.label}</Link>
               </Typography>
             </ListItem>
           ))}

@@ -1,22 +1,28 @@
 import React from 'react';
+import _ from 'lodash';
 import Error from 'next/error';
 import { NextPage } from 'next';
-// import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
+import Box from '@material-ui/core/Box';
+import Link from '@material-ui/core/Link';
 import { useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 
 import { apiGetLinks } from '../../api';
 import { LinksPageProps } from './types';
 import { useStyles } from './style';
-import { Link } from '../../api/types';
+import { Link as LinkRes } from '../../api/types';
+
 const BASE_URL = process.env.API;
+
 const LinksPage: NextPage<LinksPageProps> = props => {
   const theme = useTheme();
   const classes = useStyles(theme);
-  const links = props.links as Link[];
+  const links = props.links as LinkRes[][];
 
   if (props.error) {
     return <Error statusCode={props.error.code} title={props.error.message} />;
@@ -25,13 +31,33 @@ const LinksPage: NextPage<LinksPageProps> = props => {
   return (
     <Container maxWidth='md' fixed>
       <Paper className={classes.content}>
-        {links.map(v => (
-          <Card key={v.id}>
-            <Avatar
-              alt='Remy Sharp'
-              src={BASE_URL + v.avatar.path + v.avatar.fileName}
-            />
-          </Card>
+        {links.map((v, k) => (
+          <Grid container key={k} spacing={2}>
+            {v.map(i => (
+              <Grid item xs={12} md={3} key={i.id}>
+                <Paper className={classes.avatarPaper}>
+                  <Card key={i.id} className={classes.avatarCard}>
+                    <Avatar
+                      src={BASE_URL + i.avatar.path + i.avatar.fileName}
+                      className={classes.avatar}
+                    />
+                    <Box
+                      display='flex'
+                      alignItems='center'
+                      flexDirection='column'
+                      pt={5}
+                      pb={2}
+                    >
+                      <Link href={i.url}>{i.owner}</Link>
+                      <Typography variant='overline' component='p'>
+                        {i.description}
+                      </Typography>
+                    </Box>
+                  </Card>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
         ))}
       </Paper>
     </Container>
@@ -41,7 +67,7 @@ const LinksPage: NextPage<LinksPageProps> = props => {
 LinksPage.getInitialProps = async () => {
   try {
     const res = await apiGetLinks();
-    const links = res.data.data;
+    const links = _.chunk(res.data.data, 4);
     return { links };
   } catch (error) {
     return { error };
