@@ -11,10 +11,15 @@ export const Footer = () => {
   return (
     <Box className={classes.footer}>
       <Box className={classes.copyright}>
-        <Typography color='primary'>鄂ICP备18019320号-2</Typography>
+        <Typography variant='caption' color='primary'>
+          ©eraylee.com. 
+        </Typography>
         <Divider orientation='vertical' />
-        <Typography color='primary'>2020-2020</Typography>
+        <Typography variant='caption' color='primary'>
+          ❤ Made by ERAYLEE
+        </Typography>
       </Box>
+      <Typography variant='caption'>鄂ICP备18019320号-2</Typography>
     </Box>
   );
 };
