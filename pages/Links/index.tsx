@@ -11,11 +11,18 @@ import { useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 import { apiGetLinks } from '../../api';
-import { LinksPageProps } from './types';
-import { useStyles } from './style';
 import { Link as LinkRes } from '../../api/types';
+
+export interface LinksPageProps {
+  links?: LinkRes[][];
+  error?: {
+    code: number;
+    message: string;
+  };
+}
 
 const BASE_URL = process.env.API;
 
@@ -74,3 +81,27 @@ LinksPage.getInitialProps = async () => {
   }
 };
 export default LinksPage;
+
+export const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    content: {
+      padding: '60px 15px',
+    },
+    avatarPaper: {
+      position: 'relative',
+    },
+    avatarCard: {
+      // boxSizing: 'border-box',
+      marginTop: theme.spacing() * 5,
+    },
+    avatar: {
+      position: 'absolute',
+      top: -theme.spacing() * 4,
+      left: '50%',
+      marginLeft: -theme.spacing() * 4,
+      width: theme.spacing() * 8,
+      height: theme.spacing() * 8,
+      boxShadow: theme.shadows[5],
+    },
+  }),
+);

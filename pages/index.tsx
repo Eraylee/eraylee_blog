@@ -4,11 +4,15 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import { useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
-import { useStyles } from './style';
-import { IHomeProps } from './types';
 import { ArticleCard } from '../components/ArticleCard';
 import { apiGetArticles } from '../api';
+import { Article } from '../api/types';
+
+export interface IHomeProps {
+  articles: Article[];
+}
 
 // const FILE_API = process.env.API;
 
@@ -45,3 +49,68 @@ Home.getInitialProps = async () => {
   }
 };
 export default Home;
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    banner: {
+      width: '100%',
+      height: '56vh',
+      paddingTop: theme.spacing() * 24,
+      display: 'flex',
+      flexDirection: 'column',
+      // justifyContent: "center",
+      alignItems: 'center',
+      backgroundColor: theme.palette.primary.main,
+      // backgroundImage:
+      //   'url("https://www.transparenttextures.com/patterns/dust.png")',
+      // background: `linear-gradient( 180deg, ${theme.palette.primary.main} 10%, #1D6FA3 100%)`,
+      // boxShadow: theme.shadows[6],
+      borderRadius: '0 0 12px 12px',
+      borderTopLeftRadius: 0,
+      boxSizing: 'border-box',
+    },
+    container: {
+      marginTop: -theme.spacing() * 18,
+      padding: 0,
+      boxSizing: 'border-box',
+    },
+    welcome: {
+      paddingBottom: theme.spacing() * 2,
+    },
+    card: {
+      margin: theme.spacing() * 2,
+      boxSizing: 'border-box',
+      '&:hover': {
+        boxShadow: theme.shadows[5],
+      },
+    },
+    media: {
+      width: '100%',
+      height: 210,
+    },
+    content: {
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      boxSizing: 'border-box',
+      height: '100%',
+    },
+    time: {
+      padding: '8px 0',
+    },
+    timeIcon: {
+      marginRight: 8,
+    },
+    timeText: {
+      margin: 0,
+      padding: 0,
+    },
+    tagContent: {
+      paddingTop: 8,
+    },
+    tags: {
+      marginRight: 8,
+    },
+  }),
+);
