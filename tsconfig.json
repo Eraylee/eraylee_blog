@@ -21,6 +21,6 @@
     "resolveJsonModule": true,
     "strict": true
   },
-  "exclude": ["dist", ".next", "out", "next.config.js"],
+  "exclude": ["dist", "_next", "out", "next.config.js"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
