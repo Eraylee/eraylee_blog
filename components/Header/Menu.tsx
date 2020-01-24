@@ -53,7 +53,7 @@ export const Menu = ({ categorys, ...props }: IMenuProps) => {
           {menuConfig.map(v => (
             <ListItem button divider key={v.key} className={classes.listItem}>
               <Typography color='primary' variant='overline'>
-                <Link href={v.href} prefetch> {v.label}</Link>
+                <Link href={v.href} > {v.label}</Link>
               </Typography>
             </ListItem>
           ))}
