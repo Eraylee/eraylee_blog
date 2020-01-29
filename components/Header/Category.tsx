@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { Button } from '../Button';
+import Router from 'next/router';
 import { ICategoryProps } from './types';
 import Menu from '@material-ui/core/Menu';
 import Divider from '@material-ui/core/Divider';
@@ -21,9 +22,11 @@ const Category: React.FC<ICategoryProps> = ({ categorys }) => {
     [],
   );
 
-  const handleClose = () => {
+  const handleClose = (categoryId?: string) => {
     setAnchorEl(null);
+    categoryId && Router.push({ pathname: '/category', query: { categoryId } });
   };
+
   return categorys.length ? (
     <>
       <Button onClick={handleClick} variant='text'>
@@ -35,7 +38,7 @@ const Category: React.FC<ICategoryProps> = ({ categorys }) => {
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleClose}
+        onClose={__ => handleClose()}
       >
         {categorys.map(v => (
           <div key={v.key}>
@@ -51,7 +54,9 @@ const Category: React.FC<ICategoryProps> = ({ categorys }) => {
             {v.children &&
               v.children.map(i => (
                 <React.Fragment key={i.key}>
-                  <MenuItem onClick={handleClose}>{i.name}</MenuItem>
+                  <MenuItem onClick={__ => handleClose(i.key)}>
+                    {i.name}
+                  </MenuItem>
                   <Divider />
                 </React.Fragment>
               ))}

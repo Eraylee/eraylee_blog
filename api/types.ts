@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-01-12 21:28:44
+ * @LastEditTime : 2020-01-29 16:49:59
  */
 export type Method =
   | 'get'
@@ -42,6 +42,7 @@ export interface PageResult<T> extends BaseResult {
 
 export interface QueryParamsArticles extends QueryParams {
   title?: string;
+  categoryId?: string;
 }
 
 export interface Article {

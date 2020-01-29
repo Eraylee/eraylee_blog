@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 12:50:13
- * @LastEditTime : 2020-01-25 21:09:48
+ * @LastEditTime : 2020-01-26 16:31:45
  * @LastEditors  : ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\index.tsx
@@ -79,10 +79,7 @@ export const Header = () => {
               edge='end'
               color='inherit'
               size='medium'
-              onClick={__ => {
-                console.log(1111111111111111);
-                setOpen(true);
-              }}
+              onClick={__ => setOpen(true)}
             >
               <MenuIcon />
             </IconButton>

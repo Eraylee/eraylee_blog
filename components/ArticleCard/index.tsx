@@ -17,7 +17,7 @@ import { useStyles } from './style';
 import { toDate } from '../../lib/pipe';
 import { ArticleCardProps } from './types';
 
-const BASE_URL = process.env.API;
+const BASE_URL = process.env.FILE_URL;
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
   const theme = useTheme();

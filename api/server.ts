@@ -10,8 +10,6 @@ import { getQueryStr } from '../lib/util';
 
 const isServer = typeof window === 'undefined';
 let BASE_API = isServer ? process.env.API : '/api';
-// let BASE_API = "/api";
-// let BASE_API = "localhost:3200";
 
 if (process.env.NODE_ENV !== 'development') {
   BASE_API = process.env.API;
