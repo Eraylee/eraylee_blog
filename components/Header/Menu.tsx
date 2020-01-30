@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import Router from 'next/router';
 import Box from '@material-ui/core/Box';
 import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
@@ -32,6 +33,9 @@ export const Menu = ({ categorys, ...props }: IMenuProps) => {
     },
     [expand],
   );
+  const handleOpenCategory = useCallback((categoryId: string) => {
+    Router.push({ pathname: '/category', query: { categoryId } });
+  }, []);
   return (
     <Drawer
       {...props}
@@ -53,7 +57,7 @@ export const Menu = ({ categorys, ...props }: IMenuProps) => {
           {menuConfig.map(v => (
             <ListItem button divider key={v.key} className={classes.listItem}>
               <Typography color='primary' variant='overline'>
-                <Link href={v.href} > {v.label}</Link>
+                <Link href={v.href}> {v.label}</Link>
               </Typography>
             </ListItem>
           ))}
@@ -94,6 +98,7 @@ export const Menu = ({ categorys, ...props }: IMenuProps) => {
                       <ListItem
                         button
                         divider
+                        onClick={__ => handleOpenCategory(i.key)}
                         className={classes.grandChildListItem}
                       >
                         <Typography color='primary' variant='overline'>
