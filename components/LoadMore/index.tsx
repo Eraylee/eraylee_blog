@@ -24,10 +24,10 @@ export const LoadMore = ({ onClick, loading, hasMore }: LoadMoreProps) => {
           <Grid item xs={12} sm={8}>
             <CardContent className={classes.content}>
               <Box className={classes.box}>
-                <Skeleton variant='rect' height={34} />
-                <Skeleton variant='rect' />
-                <Skeleton variant='rect' height={24} />
-                <Skeleton variant='rect' height={14} />
+                <Skeleton variant='text' height={36} />
+                <Skeleton variant='text' />
+                <Skeleton variant='text' height={24} width='25%' />
+                <Skeleton variant='text' height={14} width='50%' />
               </Box>
             </CardContent>
           </Grid>
