@@ -22,10 +22,10 @@ const Category: React.FC<ICategoryProps> = ({ categorys }) => {
     [],
   );
 
-  const handleClose = (categoryId?: string) => {
+  const handleClose = useCallback((categoryId?: string) => {
     setAnchorEl(null);
     categoryId && Router.push({ pathname: '/category', query: { categoryId } });
-  };
+  }, []);
 
   return categorys.length ? (
     <>

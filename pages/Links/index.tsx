@@ -38,6 +38,10 @@ const LinksPage: NextPage<LinksPageProps> = props => {
   return (
     <Container maxWidth='md' fixed>
       <Paper className={classes.content}>
+        <Typography variant='h5' color='primary'>
+          欢迎各位大佬与我互加友链
+        </Typography>
+
         {links.map((v, k) => (
           <Grid container key={k} spacing={2}>
             {v.map(i => (
@@ -85,7 +89,10 @@ export default LinksPage;
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     content: {
-      padding: '60px 15px',
+      padding: theme.spacing() * 2,
+      margin: theme.spacing() * 2,
+      boxSizing: 'border-box',
+      textAlign: 'center',
     },
     avatarPaper: {
       position: 'relative',

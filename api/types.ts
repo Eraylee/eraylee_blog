@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-01-29 16:49:59
+ * @LastEditTime : 2020-01-31 11:18:04
  */
 export type Method =
   | 'get'
@@ -37,7 +37,13 @@ export interface Result<T> extends BaseResult {
 }
 
 export interface PageResult<T> extends BaseResult {
-  data: { data: T; page: number; total: number };
+  data: {
+    data: T;
+    total: number;
+    page: number;
+    limit: number;
+    maxPage: number;
+  };
 }
 
 export interface QueryParamsArticles extends QueryParams {

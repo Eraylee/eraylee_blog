@@ -3,36 +3,26 @@ import { NextPage } from 'next';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 
+import { usePagination } from '../../lib/hooks';
+import { LoadMore } from '../../components/LoadMore';
 import { ArticleCard } from '../../components/ArticleCard';
-import { apiGetArticles } from '../../api';
-import { Article } from '../../api/types';
 
 export interface IHomeProps {
-  articles: Article[];
+  categoryId: string;
 }
 
-// const FILE_API = process.env.API;
-
-const Home: NextPage<IHomeProps> = props => {
+const Home: NextPage<IHomeProps> = ({ categoryId }) => {
+  const { data, loadMore, loading, hasMore } = usePagination(categoryId);
   return (
-    <Box>
-      <Container maxWidth='md'>
-        <Box>
-          {props.articles &&
-            props.articles.map(v => <ArticleCard article={v} key={v.id} />)}
-        </Box>
-      </Container>
-    </Box>
+    <Container maxWidth='md'>
+      <Box>{data && data.map(v => <ArticleCard article={v} key={v.id} />)}</Box>
+      <LoadMore onClick={loadMore} loading={loading} hasMore={hasMore} />
+    </Container>
   );
 };
 Home.getInitialProps = async ({ query }) => {
-  try {
-    const res = await apiGetArticles({ categoryId: query.categoryId as string });
-    const articles = res.data.data;
-    return { articles };
-  } catch (error) {
-    console.error(error);
-    return { articles: [] };
-  }
+  return {
+    categoryId: query.categoryId as string,
+  };
 };
 export default Home;

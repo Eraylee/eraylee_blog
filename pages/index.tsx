@@ -6,48 +6,39 @@ import { useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
-import { ArticleCard } from '../components/ArticleCard';
-import { apiGetArticles } from '../api';
 import { Article } from '../api/types';
+import { usePagination } from '../lib/hooks';
+import { LoadMore } from '../components/LoadMore';
+import { ArticleCard } from '../components/ArticleCard';
 
 export interface IHomeProps {
   articles: Article[];
 }
 
-// const FILE_API = process.env.API;
-
-const Home: NextPage<IHomeProps> = props => {
+const Home: NextPage<IHomeProps> = () => {
+  const { data, loadMore, loading, hasMore } = usePagination();
   const theme = useTheme();
   const classes = useStyles(theme);
   return (
     <Box>
       <Box className={classes.banner}>
-        <Typography variant='h4' color='primary' className={classes.welcome}>
+        <Typography variant='h4' color='secondary' className={classes.welcome}>
           ERAYLEE'S BLOG
         </Typography>
-        {/* <Typography variant="h6" color="primary">
-          记录博客，分享生活
-        </Typography> */}
+        <Typography variant='h6' color='secondary'>
+          欢迎来访
+        </Typography>
       </Box>
       <Container maxWidth='md' className={classes.container}>
         <Box>
-          {props.articles &&
-            props.articles.map(v => <ArticleCard article={v} key={v.id} />)}
+          {data && data.map(v => <ArticleCard article={v} key={v.id} />)}
+          <LoadMore onClick={loadMore} loading={loading} hasMore={hasMore} />
         </Box>
       </Container>
     </Box>
   );
 };
-Home.getInitialProps = async () => {
-  try {
-    const res = await apiGetArticles({});
-    const articles = res.data.data;
-    return { articles };
-  } catch (error) {
-    console.error(error);
-    return { articles: [] };
-  }
-};
+
 export default Home;
 
 const useStyles = makeStyles((theme: Theme) =>

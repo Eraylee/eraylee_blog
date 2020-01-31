@@ -2,7 +2,9 @@
   "env": {
     "development": {
       "presets": ["next/babel"],
-      "plugins": ["@babel/plugin-proposal-optional-chaining"]
+      "plugins": [
+        "@babel/plugin-proposal-optional-chaining"
+      ]
     },
     "production": {
       "presets": ["next/babel"]
