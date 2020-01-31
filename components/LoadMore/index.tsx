@@ -16,7 +16,7 @@ export const LoadMore = ({ onClick, loading, hasMore }: LoadMoreProps) => {
   const classes = useStyles(theme);
   if (loading) {
     return (
-      <Card>
+      <Card className={classes.skeletonRoot}>
         <Grid container>
           <Grid item xs={12} sm={4}>
             <Skeleton variant='rect' height={theme.spacing() * 22} />

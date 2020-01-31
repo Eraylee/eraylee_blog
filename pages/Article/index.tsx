@@ -142,6 +142,7 @@ export const useStyles = makeStyles((theme: ITheme) =>
     },
     html: {
       boxSizing: 'border-box',
+      marginBottom: theme.spacing() * 2,
       padding: theme.spacing() * 3,
       wordWrap: 'break-word',
       '& h1,h2,h3,h4,h5,h6': {
