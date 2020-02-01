@@ -36,6 +36,7 @@
     "next": "9.1.4",
     "react": "16.12.0",
     "react-dom": "16.12.0",
+    "react-hook-form": "^4.8.0",
     "save": "^2.4.0",
     "typescript": "^3.7.2"
   },

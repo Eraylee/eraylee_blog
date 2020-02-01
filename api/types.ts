@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-01-31 11:18:04
+ * @LastEditTime : 2020-02-01 17:06:33
  */
 export type Method =
   | 'get'
@@ -103,4 +103,15 @@ export interface Link {
   url: string;
   description: string;
   avatar: FileRes;
+}
+
+export interface Comment {
+  id: string;
+  authorName: string;
+  authorMail: string;
+  authorUrl?: string;
+  content: string;
+  parentId?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

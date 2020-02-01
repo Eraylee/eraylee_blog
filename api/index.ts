@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-01-30 19:47:37
+ * @LastEditTime : 2020-02-01 17:07:02
  */
 import { _get, _post } from './server';
 import {
@@ -14,6 +14,7 @@ import {
   PageResult,
   Article,
   Category,
+  Comment,
 } from './types';
 
 /**
@@ -66,4 +67,11 @@ export const apiGetFileByFid = (fid: string): Promise<Result<FileRes>> => {
  */
 export const apiGetLinks = (): Promise<PageResult<Link[]>> => {
   return _get(`/link`);
+};
+/**
+ * 获取评论
+ * @param id
+ */
+export const apiGetComments = (id: string): Promise<Result<Comment[]>> => {
+  return _get(`/comment/byArticleId/${id}`);
 };

@@ -12,12 +12,14 @@ import CategoryIcon from '@material-ui/icons/Category';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-import { toDateTime } from '../../lib/pipe';
 import { Article } from '../../api/types';
+import { toDateTime } from '../../lib/pipe';
+import { CommentCard } from '../../components/CommentCard';
 import { apiGetArticle } from '../../api';
 
 export interface ArticleProps {
   article?: Article;
+  id: string;
   error?: {
     code: number;
     message: string;
@@ -81,16 +83,18 @@ const ArticlePage: NextPage<ArticleProps> = props => {
           />
         </Paper>
       </Container>
+      <CommentCard id={props.id} />
     </>
   );
 };
 ArticlePage.getInitialProps = async ({ query }) => {
+  const id = query.id as string;
   try {
-    const res = await apiGetArticle(query.id as string);
+    const res = await apiGetArticle(id);
     const article = res.data;
-    return { article };
+    return { article, id };
   } catch (error) {
-    return { error };
+    return { error, id };
   }
 };
 export default ArticlePage;

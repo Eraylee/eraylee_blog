@@ -2,12 +2,13 @@
  * @Author: ERAYLEE
  * @Date: 2020-01-30 11:56:27
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-01-31 17:33:45
+ * @LastEditTime : 2020-02-01 17:47:01
  */
 import { useState, useEffect } from 'react';
 import { useAsync } from './useAsync';
 import { apiGetArticles } from '../../api';
 import { Article } from '../../api/types';
+export { useAsync } from './useAsync';
 
 const getArticle = async (page: number, categoryId?: string) => {
   try {
