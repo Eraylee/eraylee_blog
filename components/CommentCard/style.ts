@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime : 2020-02-01 22:03:54
+ * @LastEditTime : 2020-02-02 20:36:23
  * @LastEditors  : ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -16,6 +16,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     },
     main: {
       maxWidth: 1000,
+      margin: `${theme.spacing()}px auto`,
     },
     comment: {
       padding: theme.spacing(),
@@ -34,6 +35,15 @@ export const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(),
       background: 'rgba(51,51,51, .08)',
       borderRadius: '10px',
+    },
+    replyAction: {
+      padding: theme.spacing(),
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+    submit: {
+      display: 'flex',
+      justifyContent: 'center',
     },
   }),
 );

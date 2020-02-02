@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2019-12-24 18:20:04
+ * @LastEditTime : 2020-02-02 22:25:30
  */
 import fetch from 'isomorphic-unfetch';
 import { Method } from './types';
@@ -31,7 +31,13 @@ const request = <T, P>(method: Method, url: string, params?: P): Promise<T> => {
       if (method === 'get') {
         requestUrl += getQueryStr(params);
       } else {
-        Object.assign(options, { body: params });
+        Object.assign(options, {
+          body: JSON.stringify(params),
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        });
       }
     }
 
