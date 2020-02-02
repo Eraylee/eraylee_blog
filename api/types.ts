@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-02-01 17:06:33
+ * @LastEditTime : 2020-02-02 11:07:31
  */
 export type Method =
   | 'get'
@@ -112,6 +112,14 @@ export interface Comment {
   authorUrl?: string;
   content: string;
   parentId?: string;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+export interface CommentInput {
+  articleId: string;
+  authorName : string;
+  authorMail: string;
+  authorUrl?: string;
+  content: string;
+  parentId?: string;
 }

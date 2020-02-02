@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-02-01 17:07:02
+ * @LastEditTime : 2020-02-02 21:07:24
  */
 import { _get, _post } from './server';
 import {
@@ -15,6 +15,7 @@ import {
   Article,
   Category,
   Comment,
+  CommentInput,
 } from './types';
 
 /**
@@ -74,4 +75,13 @@ export const apiGetLinks = (): Promise<PageResult<Link[]>> => {
  */
 export const apiGetComments = (id: string): Promise<Result<Comment[]>> => {
   return _get(`/comment/byArticleId/${id}`);
+};
+/**
+ * 新增评论
+ * @param data
+ */
+export const apiCreateComment = (
+  data: CommentInput,
+): Promise<Result<Comment[]>> => {
+  return _post(`/comment`, data);
 };
