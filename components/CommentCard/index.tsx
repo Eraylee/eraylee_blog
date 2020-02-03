@@ -1,4 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
+import hljs from 'highlight.js';
+import MarkdownIt from 'markdown-it';
 import Box from '@material-ui/core/Box';
 import { useForm } from 'react-hook-form';
 import Card from '@material-ui/core/Card';
@@ -11,6 +13,7 @@ import { useTheme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import * as yup from 'yup';
 import { useStyles } from './style';
 import {
@@ -24,6 +27,23 @@ import { apiGetComments, apiCreateComment } from '../../api';
 import { useAsync } from '../../lib/hooks';
 import { toDateTime } from '../../lib/pipe';
 import { CommentInput } from '../../api/types';
+const emoji = require('markdown-it-emoji');
+
+const markdownIt = new MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: true,
+  xhtmlOut: true,
+  breaks: true,
+  highlight: (str, lang) => {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {}
+    }
+    return ''; // use external default escaping
+  },
+}).use(emoji);
 
 const validationSchema = yup.object().shape({
   authorName: yup.string().required('昵称必填'),
@@ -55,28 +75,44 @@ const getComments = async (id: string) => {
 };
 
 const useComments = (id: string) => {
-  const { data, loading } = useAsync(__ => getComments(id));
-  return { data, loading };
+  const { data, loading, run } = useAsync(__ => getComments(id));
+  return { data, loading, run };
 };
 
-const Form: React.FC<FormProps> = ({ replyInfo, articleId }) => {
+const Form: React.FC<FormProps> = ({
+  replyInfo,
+  articleId,
+  isSub,
+  onRefresh,
+}) => {
   const theme = useTheme();
   const classes = useStyles(theme);
-  const { register, handleSubmit, errors } = useForm<CommentInput>({
+  const { register, handleSubmit, errors, setValue } = useForm<CommentInput>({
     validationSchema,
   });
+  useEffect(() => {
+    const commentDataJSON = localStorage.getItem('COMMENT_DATA');
+    if (commentDataJSON) {
+      const commentData: CommentInput = JSON.parse(commentDataJSON);
+      setValue('authorName', commentData.authorName);
+      setValue('authorMail', commentData.authorMail);
+      setValue('authorUrl', commentData.authorUrl);
+    }
+  }, []);
   const onSubmit = useCallback(async (data: CommentInput) => {
-
-    Object.assign(
-      data,
-      {
-        articleId,
-        content : '回复@' + replyInfo.authorName + ':' + data.content
-      },
-      replyInfo,
-    );
-    console.log(data)
-    await apiCreateComment(data);
+    try {
+      localStorage.setItem('COMMENT_DATA', JSON.stringify(data));
+      data.articleId = articleId;
+      data.parentId = replyInfo.parentId;
+      const markdowned = markdownIt.render(data.content);
+      data.content = isSub
+        ? `回复@<a href='${replyInfo.authorUrl}'/>${replyInfo.authorName}</a>: ${markdowned}`
+        : markdowned;
+      await apiCreateComment(data);
+      onRefresh();
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
   return (
     <Box className={classes.form}>
@@ -162,6 +198,7 @@ const Comment: React.FC<CommentProps> = ({
   replyInfo,
   isSub,
   articleId,
+  onRefresh,
 }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -177,7 +214,7 @@ const Comment: React.FC<CommentProps> = ({
       <Box className={classes.comment}>
         <Box className={classes.action}>
           <Typography variant='subtitle1'>
-            <Typography variant='subtitle1' component='span' color='primary'>
+            <Typography component='span' color='primary'>
               <Link href={data.authorUrl}>{data.authorName}</Link>
             </Typography>{' '}
             说：
@@ -186,11 +223,14 @@ const Comment: React.FC<CommentProps> = ({
             回复
           </Button>
         </Box>
-        <Typography variant='inherit' color='textSecondary'>
+        <Typography variant='body2' color='textSecondary'>
           {toDateTime(data.createdAt)}
         </Typography>
         <Box className={classes.content}>
-          <Typography variant='inherit'>{data.content}</Typography>
+          <Box
+            className={classes.html}
+            dangerouslySetInnerHTML={{ __html: data.content }}
+          ></Box>
           {activeId === data.id && (
             <>
               <Box className={classes.replyAction}>
@@ -199,7 +239,12 @@ const Comment: React.FC<CommentProps> = ({
                   取消
                 </Button>
               </Box>
-              <Form replyInfo={replyInfo} articleId={articleId} />
+              <Form
+                replyInfo={replyInfo}
+                articleId={articleId}
+                isSub={isSub}
+                onRefresh={onRefresh}
+              />
             </>
           )}
           {data.children &&
@@ -213,6 +258,7 @@ const Comment: React.FC<CommentProps> = ({
                 replyInfo={replyInfo}
                 isSub
                 articleId={articleId}
+                onRefresh={onRefresh}
               />
             ))}
         </Box>
@@ -224,7 +270,7 @@ const Comment: React.FC<CommentProps> = ({
 export const CommentCard: React.FC<CommentCardProps> = ({ id }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
-  const { data } = useComments(id);
+  const { data, loading, run } = useComments(id);
   const [replyInfo, setReplyInfo] = useState<ReplyInfo>({});
   const [activeId, setActiveId] = useState('');
   const handleClick = useCallback((id, info) => {
@@ -235,30 +281,56 @@ export const CommentCard: React.FC<CommentCardProps> = ({ id }) => {
     setActiveId('');
     setReplyInfo({});
   }, []);
+  const handleRefresh = useCallback(() => {
+    run();
+    setActiveId('');
+    setReplyInfo({});
+  }, []);
   return (
     <Container fixed>
       <Card className={classes.card}>
         <CardContent>
           <Typography>评论</Typography>
           <Divider />
-          <Box className={classes.main}>
-            {!activeId && <Form replyInfo={replyInfo} articleId={id} />}
-            {data ? (
-              data.map(v => (
-                <Comment
-                  data={v}
-                  key={v.id}
-                  activeId={activeId}
-                  onClick={handleClick}
-                  onCancle={handleCancle}
+          {loading ? (
+            <Box className={classes.loading}>
+              <CircularProgress color='primary' />
+            </Box>
+          ) : (
+            <Box className={classes.main}>
+              {!activeId && (
+                <Form
                   replyInfo={replyInfo}
                   articleId={id}
+                  onRefresh={handleRefresh}
                 />
-              ))
-            ) : (
-              <Typography>暂无评论</Typography>
-            )}
-          </Box>
+              )}
+              {data && data.length ? (
+                data.map(v => (
+                  <Comment
+                    data={v}
+                    key={v.id}
+                    activeId={activeId}
+                    onClick={handleClick}
+                    onCancle={handleCancle}
+                    replyInfo={replyInfo}
+                    articleId={id}
+                    onRefresh={handleRefresh}
+                  />
+                ))
+              ) : (
+                <Box className={classes.nullData}>
+                  <Typography
+                    variant='subtitle2'
+                    component='p'
+                    color='textSecondary'
+                  >
+                    暂无评论,留下第一个评论吧
+                  </Typography>
+                </Box>
+              )}
+            </Box>
+          )}
         </CardContent>
       </Card>
     </Container>

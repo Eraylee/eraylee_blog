@@ -40,7 +40,6 @@ const ArticlePage: NextPage<ArticleProps> = props => {
   const cover = BASE_URL + article.cover.path + article.cover.fileName;
   Object.assign(theme, { cover });
   const classes = useStyles(theme);
-
   return (
     <>
       <Box className={classes.cover}>
@@ -83,7 +82,7 @@ const ArticlePage: NextPage<ArticleProps> = props => {
           />
         </Paper>
       </Container>
-      <CommentCard id={props.id} />
+      {article.allowComment && <CommentCard id={props.id} />}
     </>
   );
 };

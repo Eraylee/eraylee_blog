@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime : 2019-12-22 18:17:37
+ * @LastEditTime : 2020-02-03 13:59:31
  * @LastEditors  : ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -27,9 +27,8 @@ export const useStyles = makeStyles((theme: Theme) =>
       },
     },
     paper: {
-      backgroundColor: 'rgba(255,255,255,.8)',
-      // backdropFilter: "blur(30px)"
-
+      // backgroundColor: 'rgba(255,255,255,.5)',
+      // backdropFilter: "blur(30px)",
       // "-webkit-backdrop-filter": "blur(30px)"
     },
     modal: {
