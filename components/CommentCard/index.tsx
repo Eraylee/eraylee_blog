@@ -27,6 +27,7 @@ import { apiGetComments, apiCreateComment } from '../../api';
 import { useAsync } from '../../lib/hooks';
 import { toDateTime } from '../../lib/pipe';
 import { CommentInput } from '../../api/types';
+import { HTMLRender } from '../HTMLRender';
 const emoji = require('markdown-it-emoji');
 
 const markdownIt = new MarkdownIt({
@@ -227,10 +228,8 @@ const Comment: React.FC<CommentProps> = ({
           {toDateTime(data.createdAt)}
         </Typography>
         <Box className={classes.content}>
-          <Box
-            className={classes.html}
-            dangerouslySetInnerHTML={{ __html: data.content }}
-          ></Box>
+          <HTMLRender html={data.content} />
+
           {activeId === data.id && (
             <>
               <Box className={classes.replyAction}>

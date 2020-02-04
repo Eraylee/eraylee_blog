@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-02-02 11:07:31
+ * @LastEditTime : 2020-02-04 17:30:40
  */
 export type Method =
   | 'get'
@@ -61,9 +61,9 @@ export interface Article {
   allowComment: boolean;
   user: User;
   isDraft: boolean;
-  cover: FileRes;
-  category: Category;
-  tags: Tag[];
+  cover?: FileRes;
+  category?: Category;
+  tags?: Tag[];
   createdAt: string;
   updatedAt: string;
 }
@@ -117,9 +117,20 @@ export interface Comment {
 }
 export interface CommentInput {
   articleId: string;
-  authorName : string;
+  authorName: string;
   authorMail: string;
   authorUrl?: string;
   content: string;
   parentId?: string;
+}
+
+export interface SpecialPage {
+  id: string;
+  title: string;
+  markdown: string;
+  html: string;
+  allowComment: boolean;
+  cover?: FileRes;
+  createdAt: string;
+  updatedAt: string;
 }

@@ -12,6 +12,7 @@ import CategoryIcon from '@material-ui/icons/Category';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
+import { HTMLRender } from '../../components/HTMLRender';
 import { Article } from '../../api/types';
 import { toDateTime } from '../../lib/pipe';
 import { CommentCard } from '../../components/CommentCard';
@@ -37,7 +38,8 @@ const ArticlePage: NextPage<ArticleProps> = props => {
   }
   const article = props.article as Article;
   const theme = useTheme();
-  const cover = BASE_URL + article.cover.path + article.cover.fileName;
+  const cover =
+    article.cover && BASE_URL + article.cover.path + article.cover.fileName;
   Object.assign(theme, { cover });
   const classes = useStyles(theme);
   return (
@@ -67,7 +69,7 @@ const ArticlePage: NextPage<ArticleProps> = props => {
               <Box className={classes.bottomItem}>
                 <CategoryIcon color='primary' className={classes.icon} />
                 <Typography variant='body2' className={classes.text}>
-                  分类：{article.category.name}
+                  分类：{article.category && article.category.name}
                 </Typography>
               </Box>
             </Box>
@@ -75,11 +77,8 @@ const ArticlePage: NextPage<ArticleProps> = props => {
         </Container>
       </Box>
       <Container className={classes.container} fixed>
-        <Paper>
-          <Box
-            className={classes.html}
-            dangerouslySetInnerHTML={{ __html: article.html }}
-          />
+        <Paper className={classes.paper}>
+          <HTMLRender html={article.html} />
         </Paper>
       </Container>
       {article.allowComment && <CommentCard id={props.id} />}
@@ -143,71 +142,9 @@ export const useStyles = makeStyles((theme: ITheme) =>
     container: {
       boxSizing: 'border-box',
     },
-    html: {
-      boxSizing: 'border-box',
+    paper: {
       marginBottom: theme.spacing() * 2,
       padding: theme.spacing() * 3,
-      wordWrap: 'break-word',
-      '& h1,h2,h3,h4,h5,h6': {
-        color: theme.palette.primary.light,
-      },
-      '& blockquote': {
-        // width: '100%',
-        margin: 5,
-        boxSizing: 'border-box',
-        borderLeft: '2px solid #009688',
-        padding: 8,
-        quotes: 'none',
-        background: 'none repeat scroll 0 0 rgba(102, 128, 153, 0.08)',
-      },
-      '& a': {
-        color: '#0052d9',
-        textDecoration: 'none',
-        '&:hover': {
-          textDecoration: 'underline',
-        },
-      },
-      '& img': {
-        width: '60%',
-        display: 'block',
-        margin: '0 auto',
-        boxShadow: theme.shadows[2],
-      },
-      '& pre': {
-        padding: theme.spacing() * 2,
-        overflow: 'auto',
-        borderRadius: '4px',
-        backgroundColor: '#272c34',
-        boxShadow: theme.shadows[15],
-      },
-      '& code': {
-        fontFamily:
-          "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace",
-        color: ' #fff',
-        fontSize: theme.typography.caption.fontSize,
-      },
-      '& strong,b': {
-        color: '#bf360c',
-      },
-      '& ul,ol': {
-        margin: 0,
-        paddingLeft: theme.spacing() * 2,
-      },
-      '& table': {
-        borderCollapse: 'collapse',
-        margin: '0 auto',
-        '& thead': {
-          backgroundColor: theme.palette.primary.light,
-          color: theme.palette.text.primary,
-        },
-        '& tr': {
-          borderTop: '1px solid #ccc',
-          '& th ,td': {
-            border: '1px solid #ccc',
-            padding: ' 5px 10px',
-          },
-        },
-      },
     },
   }),
 );

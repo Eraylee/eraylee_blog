@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2020-01-30 11:56:27
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-02-01 17:47:01
+ * @LastEditTime : 2020-02-03 22:22:27
  */
 import { useState, useEffect } from 'react';
 import { useAsync } from './useAsync';
@@ -14,6 +14,7 @@ const getArticle = async (page: number, categoryId?: string) => {
   try {
     const params = {
       page,
+      type: 'normal',
     };
     if (categoryId) {
       Object.assign(params, { categoryId });

@@ -8,18 +8,17 @@ import { Theme } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import CategoryIcon from '@material-ui/icons/Category';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 import { HTMLRender } from '../../components/HTMLRender';
-import { Article } from '../../api/types';
+import { SpecialPage } from '../../api/types';
 import { toDateTime } from '../../lib/pipe';
 import { CommentCard } from '../../components/CommentCard';
-import { apiGetArticle } from '../../api';
+import { apiGetSpecialPage } from '../../api';
 
-export interface ArticleProps {
-  article?: Article;
+export interface MessageProps {
+  article?: SpecialPage;
   id: string;
   error?: {
     code: number;
@@ -32,11 +31,11 @@ export interface ITheme extends Theme {
 }
 
 const BASE_URL = process.env.API;
-const ArticlePage: NextPage<ArticleProps> = props => {
+const MessagePage: NextPage<MessageProps> = props => {
   if (props.error) {
     return <Error statusCode={props.error.code} title={props.error.message} />;
   }
-  const article = props.article as Article;
+  const article = props.article as SpecialPage;
   const theme = useTheme();
   const cover =
     article.cover && BASE_URL + article.cover.path + article.cover.fileName;
@@ -50,26 +49,12 @@ const ArticlePage: NextPage<ArticleProps> = props => {
             <Typography variant='h4' color='primary' align='center'>
               {article.title}
             </Typography>
-            <Typography
-              variant='subtitle1'
-              color='primary'
-              className={classes.discription}
-              align='center'
-            >
-              {article.description}
-            </Typography>
             <Divider />
             <Box className={classes.meta}>
               <Box className={classes.bottomItem}>
                 <AccessTimeIcon color='primary' className={classes.icon} />
                 <Typography variant='body2' className={classes.text}>
                   创建时间：{toDateTime(article.createdAt)}
-                </Typography>
-              </Box>
-              <Box className={classes.bottomItem}>
-                <CategoryIcon color='primary' className={classes.icon} />
-                <Typography variant='body2' className={classes.text}>
-                  分类：{article.category && article.category.name}
                 </Typography>
               </Box>
             </Box>
@@ -85,17 +70,16 @@ const ArticlePage: NextPage<ArticleProps> = props => {
     </>
   );
 };
-ArticlePage.getInitialProps = async ({ query }) => {
-  const id = query.id as string;
+MessagePage.getInitialProps = async () => {
   try {
-    const res = await apiGetArticle(id);
+    const res = await apiGetSpecialPage('message');
     const article = res.data;
-    return { article, id };
+    return { article, id: res.data.id };
   } catch (error) {
-    return { error, id };
+    return { error, id: '' };
   }
 };
-export default ArticlePage;
+export default MessagePage;
 
 export const useStyles = makeStyles((theme: ITheme) =>
   createStyles({

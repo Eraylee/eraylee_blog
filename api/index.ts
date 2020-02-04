@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-02-02 21:07:24
+ * @LastEditTime : 2020-02-04 17:54:51
  */
 import { _get, _post } from './server';
 import {
@@ -16,6 +16,7 @@ import {
   Category,
   Comment,
   CommentInput,
+  SpecialPage,
 } from './types';
 
 /**
@@ -84,4 +85,15 @@ export const apiCreateComment = (
   data: CommentInput,
 ): Promise<Result<Comment[]>> => {
   return _post(`/comment`, data);
+};
+/**
+ * 获取特殊页面
+ * @param type
+ */
+export const apiGetSpecialPage = (
+  type: 'about' | 'message',
+): Promise<Result<SpecialPage>> => {
+  return _get(`/article/special`, {
+    type,
+  });
 };

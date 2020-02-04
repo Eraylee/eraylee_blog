@@ -58,14 +58,15 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
 
             <Box>
               <Box className={classes.tagContent}>
-                {article.tags.map(v => (
-                  <Chip
-                    className={classes.tags}
-                    size='small'
-                    key={v.id}
-                    label={v.name}
-                  />
-                ))}
+                {article.tags &&
+                  article.tags.map(v => (
+                    <Chip
+                      className={classes.tags}
+                      size='small'
+                      key={v.id}
+                      label={v.name}
+                    />
+                  ))}
               </Box>
               <Box className={classes.meta}>
                 <Box className={classes.bottomItem}>
@@ -86,7 +87,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
                 <Box className={classes.bottomItem}>
                   <CategoryIcon color='primary' className={classes.icon} />
                   <Typography variant='body2' className={classes.text}>
-                    {article.category.name}
+                    {article.category && article.category.name}
                   </Typography>
                 </Box>
               </Box>
