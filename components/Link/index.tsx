@@ -25,7 +25,7 @@ export const Link = (props: PropsWithChildren<ILinkProps>) => {
   });
   return (
     <NextLink href={href} prefetch={prefetch} as={as}>
-      <a {...other} className={clsx(className, classes.link)}>
+      <a {...other} className={clsx(className, classes.link)} >
         {props.children}
       </a>
     </NextLink>
