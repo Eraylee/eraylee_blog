@@ -103,6 +103,9 @@ const Form: React.FC<FormProps> = ({
   const onSubmit = useCallback(async (data: CommentInput) => {
     try {
       localStorage.setItem('COMMENT_DATA', JSON.stringify(data));
+      if (data.authorUrl === '') {
+        delete data.authorUrl;
+      }
       data.articleId = articleId;
       data.parentId = replyInfo.parentId;
       const markdowned = markdownIt.render(data.content);

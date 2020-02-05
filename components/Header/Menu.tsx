@@ -34,7 +34,7 @@ export const Menu = ({ categorys, ...props }: IMenuProps) => {
     [expand],
   );
   const handleOpenCategory = useCallback((categoryId: string) => {
-    Router.push({ pathname: '/category', query: { categoryId } });
+    Router.push('/category/[id]', `/category/${categoryId}`);
   }, []);
   return (
     <Drawer

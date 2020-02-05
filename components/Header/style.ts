@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime : 2020-02-03 13:59:31
+ * @LastEditTime : 2020-02-05 19:00:53
  * @LastEditors  : ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -74,11 +74,13 @@ export const useStyles = makeStyles((theme: Theme) =>
       // marginTop: theme.spacing() * 6,
     },
     childListItem: {
-      extend: 'listItem',
+      display: 'flex',
+      justifyContent: 'space-between',
       paddingLeft: theme.spacing() * 3,
     },
     grandChildListItem: {
-      extend: 'listItem',
+      display: 'flex',
+      justifyContent: 'space-between',
       paddingLeft: theme.spacing() * 4,
     },
   }),
