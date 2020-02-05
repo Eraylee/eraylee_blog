@@ -81,7 +81,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
                     className={classes.icon}
                   />
                   <Typography variant='body2' className={classes.text}>
-                    {12}
+                    {article.meta.comments}
                   </Typography>
                 </Box>
                 <Box className={classes.bottomItem}>

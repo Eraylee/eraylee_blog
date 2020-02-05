@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-02-04 21:18:41
+ * @LastEditTime : 2020-02-04 21:27:56
  */
 import fetch from 'isomorphic-unfetch';
 import { Method } from './types';
@@ -10,11 +10,6 @@ import { getQueryStr } from '../lib/util';
 
 const isServer = typeof window === 'undefined';
 let BASE_API = isServer ? process.env.API : '/api';
-
-// if (process.env.NODE_ENV !== 'development') {
-//   BASE_API = process.env.API;
-// }
-
 /**
  * 封装request
  * @param method

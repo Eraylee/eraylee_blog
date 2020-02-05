@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-02-04 17:30:40
+ * @LastEditTime : 2020-02-05 11:41:15
  */
 export type Method =
   | 'get'
@@ -51,6 +51,12 @@ export interface QueryParamsArticles extends QueryParams {
   categoryId?: string;
 }
 
+export interface Meta {
+  likes: number;
+  views: number;
+  comments: number;
+}
+
 export interface Article {
   id: string;
   title: string;
@@ -64,6 +70,7 @@ export interface Article {
   cover?: FileRes;
   category?: Category;
   tags?: Tag[];
+  meta: Meta;
   createdAt: string;
   updatedAt: string;
 }
@@ -131,6 +138,7 @@ export interface SpecialPage {
   html: string;
   allowComment: boolean;
   cover?: FileRes;
+  meta: Meta;
   createdAt: string;
   updatedAt: string;
 }
