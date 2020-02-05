@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime : 2020-02-05 15:09:09
+ * @LastEditTime : 2020-02-05 15:20:56
  * @LastEditors  : ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -23,6 +23,9 @@ export const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(),
       background: 'rgba(51,51,51, .08)',
       borderRadius: '10px',
+      '&:hover': {
+        boxShadow: theme.shadows[1],
+      },
     },
     content: {
       paddingTop: theme.spacing(),
