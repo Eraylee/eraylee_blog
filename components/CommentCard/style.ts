@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime : 2020-02-04 17:44:54
+ * @LastEditTime : 2020-02-05 15:09:09
  * @LastEditors  : ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -55,6 +55,19 @@ export const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       justifyContent: 'center',
       paddingTop: theme.spacing() * 2,
+    },
+    deleted: {
+      '&>p': {
+        color: theme.palette.text.secondary,
+        fontSize: 10,
+      },
+      '& a': {
+        color: theme.palette.secondary.light,
+        textDecoration: 'none',
+        '&:hover': {
+          textDecoration: 'underline',
+        },
+      },
     },
   }),
 );

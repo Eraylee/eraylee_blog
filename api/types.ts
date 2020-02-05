@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-02-05 11:41:15
+ * @LastEditTime : 2020-02-05 15:01:38
  */
 export type Method =
   | 'get'
@@ -119,6 +119,7 @@ export interface Comment {
   authorUrl?: string;
   content: string;
   parentId?: string;
+  isDelete?: boolean;
   createdAt: string;
   updatedAt: string;
 }

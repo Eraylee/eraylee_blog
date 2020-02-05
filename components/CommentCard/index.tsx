@@ -228,7 +228,14 @@ const Comment: React.FC<CommentProps> = ({
           {toDateTime(data.createdAt)}
         </Typography>
         <Box className={classes.content}>
-          <HTMLRender html={data.content} />
+          {data.isDelete ? (
+            <Box
+              className={classes.deleted}
+              dangerouslySetInnerHTML={{ __html: data.content }}
+            />
+          ) : (
+            <HTMLRender html={data.content} />
+          )}
 
           {activeId === data.id && (
             <>

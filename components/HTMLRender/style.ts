@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime : 2020-02-04 17:36:21
+ * @LastEditTime : 2020-02-05 15:08:55
  * @LastEditors  : ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -26,7 +26,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         background: 'none repeat scroll 0 0 rgba(102, 128, 153, 0.08)',
       },
       '& a': {
-        color: '#0052d9',
+        color: theme.palette.secondary.light,
         textDecoration: 'none',
         '&:hover': {
           textDecoration: 'underline',
