@@ -42,10 +42,8 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
               <Typography gutterBottom variant='h5'>
                 <Link
                   prefetch
-                  href={{
-                    pathname: '/article',
-                    query: { id: article.id },
-                  }}
+                  href='/article/[id]'
+                  as={`/article/${article.id}`}
                 >
                   {article.title}
                 </Link>

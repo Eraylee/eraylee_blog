@@ -46,6 +46,7 @@
     "react-hook-form": "^4.8.0",
     "save": "^2.4.0",
     "typescript": "^3.7.2",
+    "xss": "^1.0.6",
     "yup": "^0.28.1"
   },
   "devDependencies": {

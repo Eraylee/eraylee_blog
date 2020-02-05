@@ -146,7 +146,7 @@ const Form: React.FC<FormProps> = ({
           <Grid item xs={12} sm={4}>
             <TextField
               label='主页'
-              placeholder='请输入主页'
+              placeholder='请输入完整主页'
               fullWidth
               name='authorUrl'
               error={!!errors.authorUrl}
