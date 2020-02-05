@@ -59,7 +59,7 @@ const LinksPage: NextPage<LinksPageProps> = props => {
                       pt={5}
                       pb={2}
                     >
-                      <Link href={i.url}>{i.owner}</Link>
+                      <Link href={i.url} target="view_window">{i.owner}</Link>
                       <Typography variant='overline' component='p'>
                         {i.description}
                       </Typography>

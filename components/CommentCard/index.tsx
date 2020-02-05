@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import Card from '@material-ui/core/Card';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
+import Chip from '@material-ui/core/Chip';
+import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
@@ -110,7 +112,7 @@ const Form: React.FC<FormProps> = ({
       data.parentId = replyInfo.parentId;
       const markdowned = markdownIt.render(data.content);
       data.content = isSub
-        ? `回复@<a href='${replyInfo.authorUrl}'/>${replyInfo.authorName}</a>: ${markdowned}`
+        ? `回复@<a href='${replyInfo.authorUrl}' target="view_window"/>${replyInfo.authorName}</a>: ${markdowned}`
         : markdowned;
       await apiCreateComment(data);
       onRefresh();
@@ -217,19 +219,35 @@ const Comment: React.FC<CommentProps> = ({
     <>
       <Box className={classes.comment}>
         <Box className={classes.action}>
-          <Typography variant='subtitle1'>
-            <Typography component='span' color='primary'>
-              <Link href={data.authorUrl}>{data.authorName}</Link>
-            </Typography>{' '}
-            说：
-          </Typography>
+          <Box className={classes.userInfo}>
+            <Typography variant='body1'>
+              <Link href={data.authorUrl} target='view_window'>
+                {data.authorName}:
+              </Link>
+            </Typography>
+            <Typography variant='body2' className={classes.createdAt}>
+              {toDateTime(data.createdAt)}
+            </Typography>
+            <Hidden xsDown>
+              <Box className={classes.authorAgent}>
+                <Chip
+                  size='small'
+                  color='secondary'
+                  label={data.authorAgent.split('/')[0]}
+                />{' '}
+                <Chip
+                  size='small'
+                  color='secondary'
+                  label={data.authorAgent.split('/')[1]}
+                />
+              </Box>
+            </Hidden>
+          </Box>
           <Button size='small' color='secondary' onClick={handleClick}>
             回复
           </Button>
         </Box>
-        <Typography variant='body2' color='textSecondary'>
-          {toDateTime(data.createdAt)}
-        </Typography>
+
         <Box className={classes.content}>
           {data.isDelete ? (
             <Box

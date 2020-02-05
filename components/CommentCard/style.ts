@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime : 2020-02-05 15:20:56
+ * @LastEditTime : 2020-02-05 19:50:28
  * @LastEditors  : ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -39,6 +39,18 @@ export const useStyles = makeStyles((theme: Theme) =>
     action: {
       display: 'flex',
       justifyContent: 'space-between',
+    },
+    createdAt:{
+      color: theme.palette.text.secondary,
+      fontSize: 10,
+      marginLeft: theme.spacing() 
+    },
+    userInfo:{
+      display: 'flex',
+      alignItems:'center'
+    },
+    authorAgent:{
+      marginLeft: theme.spacing() 
     },
     form: {
       padding: theme.spacing(),

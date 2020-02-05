@@ -2,22 +2,13 @@
  * @Author: ERAYLEE
  * @Date: 2020-02-01 17:15:14
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-02-05 15:03:44
+ * @LastEditTime : 2020-02-05 19:18:41
  */
-
+import { Comment } from '../../api/types';
 export interface CommentCardProps {
   id: string;
 }
-export interface CommentItem {
-  id: string;
-  authorName: string;
-  authorMail: string;
-  authorUrl?: string;
-  content: string;
-  isDelete?: boolean;
-  parentId?: string;
-  createdAt?: string;
-  updatedAt?: string;
+export interface CommentItem extends Comment {
   children?: CommentItem[];
 }
 export interface CommentProps {
