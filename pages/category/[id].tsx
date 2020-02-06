@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 
-import { usePagination } from '../../lib/hooks';
+import { useArticles } from '../../lib/hooks';
 import { LoadMore } from '../../components/LoadMore';
 import { ArticleCard } from '../../components/ArticleCard';
 
@@ -12,7 +12,7 @@ export interface IHomeProps {
 }
 
 const Home: NextPage<IHomeProps> = ({ id }) => {
-  const { data, loadMore, loading, hasMore } = usePagination(id);
+  const { data, loadMore, loading, hasMore } = useArticles(id);
   return (
     <Container maxWidth='md'>
       <Box>{data && data.map(v => <ArticleCard article={v} key={v.id} />)}</Box>

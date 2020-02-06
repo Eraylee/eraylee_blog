@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2020-02-01 17:15:14
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-02-05 19:18:41
+ * @LastEditTime : 2020-02-06 22:05:45
  */
 import { Comment } from '../../api/types';
 export interface CommentCardProps {
@@ -27,6 +27,12 @@ export interface FormProps {
   isSub?: boolean;
   replyInfo: ReplyInfo;
   onRefresh: () => any;
+}
+
+export interface LoadMoreProps {
+  loading: boolean;
+  hasMore: boolean;
+  onClick: () => any;
 }
 
 export interface ReplyInfo {

@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 import { Article } from '../api/types';
-import { usePagination } from '../lib/hooks';
+import { useArticles } from '../lib/hooks';
 import { LoadMore } from '../components/LoadMore';
 import { ArticleCard } from '../components/ArticleCard';
 
@@ -16,7 +16,7 @@ export interface IHomeProps {
 }
 
 const Home: NextPage<IHomeProps> = () => {
-  const { data, loadMore, loading, hasMore } = usePagination();
+  const { data, loadMore, loading, hasMore } = useArticles();
   const theme = useTheme();
   const classes = useStyles(theme);
   return (

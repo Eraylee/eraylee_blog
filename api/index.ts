@@ -2,10 +2,11 @@
  * @Author: ERAYLEE
  * @Date: 2019-12-10 18:12:37
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-02-04 17:54:51
+ * @LastEditTime : 2020-02-06 19:32:58
  */
 import { _get, _post } from './server';
 import {
+  QueryParams,
   QueryParamsArticles,
   Result,
   FileRes,
@@ -74,8 +75,11 @@ export const apiGetLinks = (): Promise<PageResult<Link[]>> => {
  * 获取评论
  * @param id
  */
-export const apiGetComments = (id: string): Promise<Result<Comment[]>> => {
-  return _get(`/comment/byArticleId/${id}`);
+export const apiGetComments = (
+  id: string,
+  data: QueryParams,
+): Promise<PageResult<Comment[]>> => {
+  return _get(`/comment/byArticleId/${id}`, data);
 };
 /**
  * 新增评论

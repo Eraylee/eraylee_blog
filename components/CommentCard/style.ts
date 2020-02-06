@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime : 2020-02-05 19:50:28
+ * @LastEditTime : 2020-02-06 21:48:06
  * @LastEditors  : ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -30,27 +30,22 @@ export const useStyles = makeStyles((theme: Theme) =>
     content: {
       paddingTop: theme.spacing(),
     },
-    loading: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      margin: theme.spacing() * 2,
-    },
+
     action: {
       display: 'flex',
       justifyContent: 'space-between',
     },
-    createdAt:{
+    createdAt: {
       color: theme.palette.text.secondary,
       fontSize: 10,
-      marginLeft: theme.spacing() 
+      marginLeft: theme.spacing(),
     },
-    userInfo:{
+    userInfo: {
       display: 'flex',
-      alignItems:'center'
+      alignItems: 'center',
     },
-    authorAgent:{
-      marginLeft: theme.spacing() 
+    authorAgent: {
+      marginLeft: theme.spacing(),
     },
     form: {
       padding: theme.spacing(),
@@ -83,6 +78,17 @@ export const useStyles = makeStyles((theme: Theme) =>
           textDecoration: 'underline',
         },
       },
+    },
+    loadMore: {
+      display: 'flex',
+      justifyContent: 'center',
+      background: 'rgba(51,51,51, .08)',
+      borderRadius: '10px',
+    },
+    loading: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   }),
 );
