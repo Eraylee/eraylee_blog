@@ -2,7 +2,7 @@
  * @Author: ERAYLEE
  * @Date: 2020-01-30 11:56:27
  * @LastEditors  : ERAYLEE
- * @LastEditTime : 2020-02-06 22:08:36
+ * @LastEditTime : 2020-02-07 11:18:03
  */
 import { useState, useEffect, useCallback } from 'react';
 import { useAsync } from './useAsync';
@@ -69,9 +69,9 @@ export const useComments = (id: string) => {
   const [list, setList] = useState<CommentItem[]>([]);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const { loading, data, run } = useAsync(() => getComments(page, id), [page]);
-  const loadMore = () => {
+  const loadMore = useCallback(() => {
     setPage(p => p + 1);
-  };
+  }, []);
   useEffect(() => {
     if (data) {
       const parents = data.data.filter(v => !v.parentId);
@@ -89,9 +89,12 @@ export const useComments = (id: string) => {
     }
   }, [data]);
   const refresh = useCallback(() => {
+    if (page === 1) {
+      run();
+    } else {
+      setPage(1);
+    }
     setList([]);
-    setPage(1);
-    run();
-  }, []);
+  }, [page]);
   return { loading, data: list, loadMore, refresh, hasMore };
 };

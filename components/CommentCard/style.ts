@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime : 2020-02-06 21:48:06
+ * @LastEditTime : 2020-02-07 10:39:57
  * @LastEditors  : ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -27,10 +27,6 @@ export const useStyles = makeStyles((theme: Theme) =>
         boxShadow: theme.shadows[1],
       },
     },
-    content: {
-      paddingTop: theme.spacing(),
-    },
-
     action: {
       display: 'flex',
       justifyContent: 'space-between',

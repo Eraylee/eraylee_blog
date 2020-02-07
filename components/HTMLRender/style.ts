@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime : 2020-02-05 15:08:55
+ * @LastEditTime : 2020-02-07 10:43:57
  * @LastEditors  : ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -15,6 +15,10 @@ export const useStyles = makeStyles((theme: Theme) =>
       wordWrap: 'break-word',
       '& h1,h2,h3,h4,h5,h6': {
         color: theme.palette.primary.light,
+      },
+      '& p': {
+        padding: 0,
+        margin: 0,
       },
       '& blockquote': {
         // width: '100%',

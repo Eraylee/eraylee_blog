@@ -65,7 +65,7 @@ export const Comment: React.FC<CommentProps> = ({
           </Button>
         </Box>
 
-        <Box className={classes.content}>
+        <Box>
           {data.isDelete ? (
             <Box
               className={classes.deleted}

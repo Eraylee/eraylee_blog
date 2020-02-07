@@ -32,7 +32,7 @@ export const CommentCard: React.FC<CommentCardProps> = ({ id }) => {
     refresh();
     setActiveId('');
     setReplyInfo({});
-  }, []);
+  }, [refresh]);
   return (
     <Container fixed>
       <Card className={classes.card}>

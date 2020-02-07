@@ -23,13 +23,9 @@ export const LoadMore: React.FC<LoadMoreProps> = ({
   }
   return (
     <Box className={classes.loadMore}>
-      {hasMore ? (
+      {hasMore && (
         <Button size='small' variant='text' onClick={onClick}>
           加载更多
-        </Button>
-      ) : (
-        <Button size='small' variant='text'>
-          暂无更多
         </Button>
       )}
     </Box>

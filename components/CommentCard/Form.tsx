@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import * as yup from 'yup';
 import hljs from 'highlight.js';
 import MarkdownIt from 'markdown-it';
@@ -50,6 +50,7 @@ export const Form: React.FC<FormProps> = ({
 }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
+  const [disabled, setDisabled] = useState(false);
   const { register, handleSubmit, errors, setValue } = useForm<CommentInput>({
     validationSchema,
   });
@@ -60,10 +61,12 @@ export const Form: React.FC<FormProps> = ({
       setValue('authorName', commentData.authorName);
       setValue('authorMail', commentData.authorMail);
       setValue('authorUrl', commentData.authorUrl);
+      setValue('content', '');
     }
-  }, []);
+  }, [disabled]);
   const onSubmit = useCallback(async (data: CommentInput) => {
     try {
+      setDisabled(true);
       localStorage.setItem('COMMENT_DATA', JSON.stringify(data));
       if (data.authorUrl === '') {
         delete data.authorUrl;
@@ -75,6 +78,7 @@ export const Form: React.FC<FormProps> = ({
         ? `回复@<a href='${replyInfo.authorUrl}' target="view_window"/>${replyInfo.authorName}</a>: ${markdowned}`
         : markdowned;
       await apiCreateComment(data);
+      setDisabled(false);
       onRefresh();
     } catch (error) {
       console.error(error);
@@ -146,6 +150,7 @@ export const Form: React.FC<FormProps> = ({
               type='submit'
               size='small'
               color='secondary'
+              disabled={disabled}
             >
               提交
             </Button>
