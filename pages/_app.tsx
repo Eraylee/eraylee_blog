@@ -7,6 +7,7 @@ import { StoreProvider, Store } from 'easy-peasy';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { StylesProvider } from '@material-ui/core/styles';
+import { SnackbarProvider } from 'notistack';
 // import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 
 import theme from '../lib/theme';
@@ -56,10 +57,12 @@ class MyApp extends App<IAppProps> {
         <StoreProvider store={store}>
           <StylesProvider>
             <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
+              <SnackbarProvider maxSnack={3}>
+                <CssBaseline />
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </SnackbarProvider>
             </ThemeProvider>
           </StylesProvider>
         </StoreProvider>

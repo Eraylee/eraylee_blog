@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { useTheme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { useSnackbar } from 'notistack';
 
 import { useStyles } from './style';
 import { FormProps } from './types';
@@ -51,6 +52,7 @@ export const Form: React.FC<FormProps> = ({
   const theme = useTheme();
   const classes = useStyles(theme);
   const [disabled, setDisabled] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const { register, handleSubmit, errors, setValue } = useForm<CommentInput>({
     validationSchema,
   });
@@ -81,9 +83,14 @@ export const Form: React.FC<FormProps> = ({
       setDisabled(false);
       onRefresh();
     } catch (error) {
+      setDisabled(false);
+      enqueueSnackbar(error.message, {
+        variant: 'error',
+      });
       console.error(error);
     }
   }, []);
+
   return (
     <Box className={classes.form}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -98,6 +105,9 @@ export const Form: React.FC<FormProps> = ({
               error={!!errors.authorName}
               helperText={errors.authorName && errors.authorName.message}
               inputRef={register}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Grid>
           <Grid item xs={6} sm={4}>
@@ -110,6 +120,9 @@ export const Form: React.FC<FormProps> = ({
               error={!!errors.authorMail}
               helperText={errors.authorMail && errors.authorMail.message}
               inputRef={register}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -122,6 +135,9 @@ export const Form: React.FC<FormProps> = ({
               helperText={errors.authorUrl && errors.authorUrl.message}
               inputRef={register}
               variant='filled'
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Grid>
           <Grid item xs={12}>
