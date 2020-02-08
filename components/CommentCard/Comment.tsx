@@ -50,12 +50,12 @@ export const Comment: React.FC<CommentProps> = ({
                 <Chip
                   size='small'
                   color='secondary'
-                  label={data.authorAgent.split('/')[0]}
+                  label={data.authorAgent.split('/')[1].split(' ')[0]}
                 />{' '}
                 <Chip
                   size='small'
                   color='secondary'
-                  label={data.authorAgent.split('/')[1]}
+                  label={data.authorAgent.split('/')[0]}
                 />
               </Box>
             </Hidden>
