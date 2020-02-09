@@ -13,8 +13,8 @@ import CategoryIcon from '@material-ui/icons/Category';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-import { apiGetSpecialPage } from '../../api';
-import { SpecialPage } from '../../api/types';
+import { Article } from '../../api/types';
+import { apiGetArticle } from '../../api';
 import { toFromNow, toDateTime } from '../../lib/pipe';
 import { HTMLRender } from '../../components/HTMLRender';
 import { CommentCard } from '../../components/CommentCard';

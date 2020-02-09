@@ -12,11 +12,11 @@ import Typography from '@material-ui/core/Typography';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-import { HTMLRender } from '../../components/HTMLRender';
 import { SpecialPage } from '../../api/types';
-import { toFromNow, toDateTime } from '../../lib/pipe';
-import { CommentCard } from '../../components/CommentCard';
 import { apiGetSpecialPage } from '../../api';
+import { toFromNow, toDateTime } from '../../lib/pipe';
+import { HTMLRender } from '../../components/HTMLRender';
+import { CommentCard } from '../../components/CommentCard';
 
 export interface MessageProps {
   article?: SpecialPage;
