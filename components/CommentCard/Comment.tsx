@@ -4,12 +4,13 @@ import Link from '@material-ui/core/Link';
 import Chip from '@material-ui/core/Chip';
 import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
 import { useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
 import { useStyles } from './style';
 import { CommentProps } from './types';
-import { toDateTime } from '../../lib/pipe';
+import { toFromNow, toDateTime } from '../../lib/pipe';
 import { Form } from './Form';
 import { HTMLRender } from '../HTMLRender';
 
@@ -42,9 +43,11 @@ export const Comment: React.FC<CommentProps> = ({
                 {data.authorName}:
               </Link>
             </Typography>
-            <Typography variant='body2' className={classes.createdAt}>
-              {toDateTime(data.createdAt)}
-            </Typography>
+            <Tooltip title={toDateTime(data.createdAt)} placement='top'>
+              <Typography variant='body2' className={classes.createdAt}>
+                {toFromNow(data.createdAt)}
+              </Typography>
+            </Tooltip>
             <Hidden xsDown>
               <Box className={classes.authorAgent}>
                 <Chip

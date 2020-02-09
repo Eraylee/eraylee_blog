@@ -3,6 +3,7 @@ import Error from 'next/error';
 import { NextPage } from 'next';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
+import Tooltip from '@material-ui/core/Tooltip';
 import Divider from '@material-ui/core/Divider';
 import { Theme } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
@@ -12,12 +13,11 @@ import CategoryIcon from '@material-ui/icons/Category';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
+import { apiGetSpecialPage } from '../../api';
+import { SpecialPage } from '../../api/types';
+import { toFromNow, toDateTime } from '../../lib/pipe';
 import { HTMLRender } from '../../components/HTMLRender';
-import { Article } from '../../api/types';
-import { toDateTime } from '../../lib/pipe';
 import { CommentCard } from '../../components/CommentCard';
-import { apiGetArticle } from '../../api';
-
 export interface ArticleProps {
   article?: Article;
   id: string;
@@ -62,9 +62,11 @@ const ArticlePage: NextPage<ArticleProps> = props => {
             <Box className={classes.meta}>
               <Box className={classes.bottomItem}>
                 <AccessTimeIcon color='primary' className={classes.icon} />
-                <Typography variant='body2' className={classes.text}>
-                  创建时间：{toDateTime(article.createdAt)}
-                </Typography>
+                <Tooltip title={toDateTime(article.createdAt)} placement='top'>
+                  <Typography variant='body2' className={classes.text}>
+                    创建时间：{toFromNow(article.createdAt)}
+                  </Typography>
+                </Tooltip>
               </Box>
               <Box className={classes.bottomItem}>
                 <CategoryIcon color='primary' className={classes.icon} />
