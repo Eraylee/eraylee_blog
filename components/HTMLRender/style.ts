@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime : 2020-02-07 10:43:57
- * @LastEditors  : ERAYLEE
+ * @LastEditTime: 2020-02-25 17:38:20
+ * @LastEditors: ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
  */
@@ -19,6 +19,14 @@ export const useStyles = makeStyles((theme: Theme) =>
       '& p': {
         padding: 0,
         margin: 0,
+        "& code" :{
+          fontFamily:
+          "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace",
+          color: theme.palette.text.primary,
+          padding: '0 4px',
+          background: 'none repeat scroll 0 0 rgba(102, 128, 153, 0.08)',
+          fontSize: theme.typography.caption.fontSize,
+        }
       },
       '& blockquote': {
         // width: '100%',
@@ -39,7 +47,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       '& img': {
         width: '60%',
         display: 'block',
-        margin: '0 auto',
+        margin: '8px auto',
         boxShadow: theme.shadows[2],
       },
       '& pre': {
