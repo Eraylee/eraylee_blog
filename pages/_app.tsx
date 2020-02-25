@@ -40,6 +40,15 @@ class MyApp extends App<IAppProps> {
    */
   render() {
     const { Component, pageProps, store } = this.props;
+    const script = `
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?aef5ae20736847da8a62308f5181fbf2";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    `;
     return (
       <>
         <Head>
@@ -52,6 +61,7 @@ class MyApp extends App<IAppProps> {
             rel='stylesheet'
             href='https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/atom-one-dark-reasonable.min.css'
           ></link>
+          <script>{script}</script>
         </Head>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <StoreProvider store={store}>
