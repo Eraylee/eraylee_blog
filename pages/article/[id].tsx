@@ -9,6 +9,7 @@ import { Theme } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import Visibility from '@material-ui/icons/Visibility';
 import CategoryIcon from '@material-ui/icons/Category';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
@@ -72,6 +73,12 @@ const ArticlePage: NextPage<ArticleProps> = props => {
                 <CategoryIcon color='primary' className={classes.icon} />
                 <Typography variant='body2' className={classes.text}>
                   分类：{article.category && article.category.name}
+                </Typography>
+              </Box>
+              <Box className={classes.bottomItem}>
+                <Visibility color='primary' className={classes.icon} />
+                <Typography variant='body2' className={classes.text}>
+                  浏览：{article.meta.views}
                 </Typography>
               </Box>
             </Box>

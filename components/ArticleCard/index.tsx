@@ -7,6 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CategoryIcon from '@material-ui/icons/Category';
+import Visibility from '@material-ui/icons/Visibility';
 import CardContent from '@material-ui/core/CardContent';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -80,6 +81,15 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
                   />
                   <Typography variant='body2' className={classes.text}>
                     {article.meta.comments}
+                  </Typography>
+                </Box>
+                <Box className={classes.bottomItem}>
+                  <Visibility
+                    color='primary'
+                    className={classes.icon}
+                  />
+                  <Typography variant='body2' className={classes.text}>
+                    {article.meta.views}
                   </Typography>
                 </Box>
                 <Box className={classes.bottomItem}>
