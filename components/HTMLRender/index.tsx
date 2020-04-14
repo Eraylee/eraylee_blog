@@ -3,15 +3,13 @@ import Box from '@material-ui/core/Box';
 import { useTheme } from '@material-ui/core/styles';
 import { HTMLRenderProps } from './types';
 import { useStyles } from './style';
-import { filterXSS } from 'xss';
+import './theme.css'
+// import { filterXSS } from 'xss';
 
 export const HTMLRender: React.FC<HTMLRenderProps> = ({ html }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   return (
-    <Box
-      className={classes.html}
-      dangerouslySetInnerHTML={{ __html: filterXSS(html) }}
-    />
+    <Box className={classes.html} dangerouslySetInnerHTML={{ __html: html }} />
   );
 };

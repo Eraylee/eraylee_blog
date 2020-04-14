@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 22:59:49
- * @LastEditTime: 2020-02-25 19:33:43
+ * @LastEditTime: 2020-04-14 16:37:56
  * @LastEditors: ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\style.ts
@@ -54,8 +54,8 @@ export const useStyles = makeStyles((theme: Theme) =>
         padding: theme.spacing() * 2,
         overflow: 'auto',
         borderRadius: '4px',
-        backgroundColor: '#272c34',
-        boxShadow: theme.shadows[15],
+        backgroundColor: '#2d2d2d',
+        boxShadow: theme.shadows[2],
       },
       '& code': {
         fontFamily:

@@ -57,10 +57,7 @@ class MyApp extends App<IAppProps> {
           <meta name='viewport' content='width=device-width, initial-scale=1' />
           <meta name='theme-color' content='#000000' />
           <title>ERAYLEE'S WEBSITE</title>
-          <link
-            rel='stylesheet'
-            href='https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/atom-one-dark-reasonable.min.css'
-          ></link>
+
           <script>{script}</script>
         </Head>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
