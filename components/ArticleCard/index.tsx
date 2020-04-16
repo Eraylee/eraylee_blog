@@ -18,8 +18,6 @@ import { useStyles } from './style';
 import { toDate } from '../../lib/pipe';
 import { ArticleCardProps } from './types';
 
-const BASE_URL = process.env.FILE_URL;
-
 export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -31,7 +29,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
             <CardActionArea>
               <CardMedia
                 className={classes.media}
-                image={BASE_URL + article.cover.path + article.cover.fileName}
+                image={article.cover.path}
                 title='Contemplative Reptile'
               />
             </CardActionArea>
@@ -84,10 +82,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
                   </Typography>
                 </Box>
                 <Box className={classes.bottomItem}>
-                  <Visibility
-                    color='primary'
-                    className={classes.icon}
-                  />
+                  <Visibility color='primary' className={classes.icon} />
                   <Typography variant='body2' className={classes.text}>
                     {article.meta.views}
                   </Typography>
