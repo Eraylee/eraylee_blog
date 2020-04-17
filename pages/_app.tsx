@@ -13,7 +13,7 @@ import { SnackbarProvider } from 'notistack';
 import theme from '../lib/theme';
 import { Layout } from '../components/Layout';
 import widthStore from '../lib/withStore';
-
+const isDev = process.env.NODE_ENV === 'development';
 interface IAppProps {
   store: Store;
 }
@@ -40,7 +40,8 @@ class MyApp extends App<IAppProps> {
    */
   render() {
     const { Component, pageProps, store } = this.props;
-    const script = `
+    const script = isDev
+      ? `
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
@@ -48,7 +49,8 @@ class MyApp extends App<IAppProps> {
       var s = document.getElementsByTagName("script")[0]; 
       s.parentNode.insertBefore(hm, s);
     })();
-    `;
+    `
+      : '';
     return (
       <>
         <Head>
@@ -57,7 +59,14 @@ class MyApp extends App<IAppProps> {
           <meta name='viewport' content='width=device-width, initial-scale=1' />
           <meta name='theme-color' content='#000000' />
           <title>ERAYLEE'S WEBSITE</title>
-
+          <link
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
+          />
+          <link
+            href='https://cdn.bootcss.com/prism/9000.0.1/themes/prism-tomorrow.min.css'
+            rel='stylesheet'
+          />
           <script>{script}</script>
         </Head>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

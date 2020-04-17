@@ -3,7 +3,6 @@ import Box from '@material-ui/core/Box';
 import { useTheme } from '@material-ui/core/styles';
 import { HTMLRenderProps } from './types';
 import { useStyles } from './style';
-import './theme.css';
 import { filterXSS } from 'xss';
 
 const options = {

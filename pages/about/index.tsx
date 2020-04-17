@@ -31,15 +31,13 @@ export interface ITheme extends Theme {
   cover: string;
 }
 
-const BASE_URL = process.env.API;
 const AboutPage: NextPage<AboutProps> = props => {
   if (props.error) {
     return <Error statusCode={props.error.code} title={props.error.message} />;
   }
   const article = props.article as SpecialPage;
   const theme = useTheme();
-  const cover =
-    article.cover && BASE_URL + article.cover.path + article.cover.fileName;
+  const cover = article.cover && article.cover.path;
   Object.assign(theme, { cover });
   const classes = useStyles(theme);
   return (

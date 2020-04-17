@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-12-02 12:50:13
- * @LastEditTime : 2020-01-26 16:31:45
- * @LastEditors  : ERAYLEE
+ * @LastEditTime: 2020-04-17 15:34:33
+ * @LastEditors: ERAYLEE
  * @Description: In User Settings Edit
  * @FilePath: \eraylee-blog\components\Header\index.tsx
  */
@@ -67,9 +67,7 @@ export const Header = () => {
             {menuConfig.map(v => (
               <Button variant='text' key={v.key}>
                 <Typography variant='subtitle1' className={classes.link}>
-                  <Link href={v.href} prefetch>
-                    {v.label}
-                  </Link>
+                  <Link href={v.href}>{v.label}</Link>
                 </Typography>
               </Button>
             ))}
