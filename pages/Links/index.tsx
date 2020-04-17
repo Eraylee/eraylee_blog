@@ -24,8 +24,6 @@ export interface LinksPageProps {
   };
 }
 
-const BASE_URL = process.env.API;
-
 const LinksPage: NextPage<LinksPageProps> = props => {
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -48,10 +46,7 @@ const LinksPage: NextPage<LinksPageProps> = props => {
               <Grid item xs={12} md={3} key={i.id}>
                 <Paper className={classes.avatarPaper}>
                   <Card key={i.id} className={classes.avatarCard}>
-                    <Avatar
-                      src={BASE_URL + i.avatar.path + i.avatar.fileName}
-                      className={classes.avatar}
-                    />
+                    <Avatar src={i.avatar.path} className={classes.avatar} />
                     <Box
                       display='flex'
                       alignItems='center'
@@ -59,7 +54,9 @@ const LinksPage: NextPage<LinksPageProps> = props => {
                       pt={5}
                       pb={2}
                     >
-                      <Link href={i.url} target="view_window">{i.owner}</Link>
+                      <Link href={i.url} target='view_window'>
+                        {i.owner}
+                      </Link>
                       <Typography variant='overline' component='p'>
                         {i.description}
                       </Typography>
