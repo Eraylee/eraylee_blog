@@ -38,7 +38,7 @@ const ArticlePage: NextPage<ArticleProps> = props => {
   }
   const article = props.article as Article;
   const theme = useTheme();
-  const cover = article?.cover?.path;
+  const cover = article.cover && article.cover.path;
   Object.assign(theme, { cover });
   const classes = useStyles(theme);
   return (
