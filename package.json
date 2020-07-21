@@ -37,7 +37,7 @@
     "koa-better-http-proxy": "^0.2.4",
     "koa-proxies": "^0.9.0",
     "koa-router": "^7.4.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "markdown-it": "^10.0.0",
     "markdown-it-emoji": "^1.4.0",
     "moment": "^2.24.0",
