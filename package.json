@@ -27,7 +27,7 @@
     "dotenv-webpack": "^1.7.0",
     "easy-peasy": "^3.2.3",
     "eslint": "^6.7.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "highlight.js": "^9.18.1",
     "hljs": "^6.2.3",
     "http-proxy-middleware": "^0.20.0",
